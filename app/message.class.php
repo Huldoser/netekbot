@@ -5,15 +5,16 @@
     private $messageText;
     private $user;
 
-    function __construct($messageText, $user = null) {
+    function __construct($messageText, $user) {
       // NOT SURE I GOT THIS!
       if(is_string($messageText)) { // init based on a messageText type
           $this->messageText = $messageText;
           $this->user = $user;
-      } else { // init based on message text and user
-          $this->messageText = $messageText->messageText;
-          $this->user = $messageText->user;
       }
+      // } else { // init based on message text and user
+      //     $this->messageText = $messageText->messageText;
+      //     $this->user = $messageText->user;
+      // }
     }
 
     public function getUser() {
