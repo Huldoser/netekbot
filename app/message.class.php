@@ -6,11 +6,10 @@
     private $user;
 
     function __construct($messageText, $user = null) {
-      // NOT SURE I GOT THIS!
-      if(is_string($messageText)) { // init based on a messageText type
-          $this->messageText = $messageText;
-          $this->user = $user;
-      } else { // init based on message text and user
+      // if(is_string($messageText)) { // init based on a messageText type
+      //     $this->messageText = $messageText;
+      //     $this->user = $user;
+      // } else { // init based on message text and user
           $this->messageText = $messageText->messageText;
           $this->user = $messageText->user;
       }
@@ -26,10 +25,6 @@
 
     public function setMessage($messageText) {
       $this->messageText = $messageText;
-    }
-
-    public function __toString() {
-      return $this->user;
     }
 
   }
