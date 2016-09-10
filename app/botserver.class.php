@@ -52,7 +52,6 @@
       $messaging_events = $data['entry'][0]['messaging'];
 
       foreach((array) $messaging_events as $key => $value) {
-        $counter++;
 
         $event = $value;
         $sender = $event['sender'];
