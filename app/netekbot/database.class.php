@@ -14,7 +14,7 @@
     }
 
     public function getPhase($uid) {
-      $currentConnection = openDBConnection('current_sessions');
+      $currentConnection = $this->openDBConnection('current_sessions');
 
       $sql = "SELECT current_phase FROM `current_sessions` WHERE `uid` = ".$uid;
       mysqli_query($currentConnection, $sql);
@@ -33,7 +33,7 @@
     }
 
     public function setPhase($uid, $phaseNumber) {
-      $currentConnection = openDBConnection('current_sessions');
+      $currentConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed face to db with related uid
       $sql = "UPDATE `current_sessions` SET `current_phase` = '".$phaseNumber."' WHERE `uid` ".$uid;
