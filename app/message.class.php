@@ -12,7 +12,7 @@
       // } else { // init based on message text and user
           $this->messageText = $messageText->messageText;
           $this->user = $messageText->user;
-      }
+      //}
     }
 
     public function getUser() {
