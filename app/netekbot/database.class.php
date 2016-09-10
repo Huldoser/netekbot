@@ -25,6 +25,7 @@
         while($row = $result->fetch_assoc()) {
           return $row["current_phase"];
         }
+        $this->closeDBConnection($currentConnection);
       } else {
         $this->setPhase($uid, 0);
       }
@@ -39,8 +40,10 @@
       $sql = "UPDATE `current_sessions` SET `current_phase` = '".$phaseNumber."' WHERE `uid` ".$uid;
 
       // Kill connection if error occured
-      if ($this->connection->query($sql) !== true) {
+      if (!$this->connection->query($sql)) {
         die('setPhase has been failed. error: '.$this->connection->connect_error);
+      } else {
+        $this->connection->query($sql);
       }
 
       $this->closeDBConnection($currentConnection);
@@ -69,7 +72,7 @@
 
     private function closeDBConnection($theConnection) {
       $this->log->info('closing connection');
-      
+
       mysqli_close($this->connection);
     }
 
