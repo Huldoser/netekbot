@@ -64,6 +64,8 @@
           $botMessage = $this->bot->processMessage($message);
           if ($botMessage) {
             $this->sendMessage($message);
+          } else {
+            $this->sendMessage('error');
           }
         }
       }
