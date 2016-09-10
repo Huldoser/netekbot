@@ -12,7 +12,7 @@
       $this->log->info('processing the message');
 
       // Declerations and Initializations
-      $db = new database('current_sessions', $log);
+      $db = new database('current_sessions', $this->log);
 
 
       // Get the current phase for the current user

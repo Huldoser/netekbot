@@ -23,11 +23,11 @@
 
       // Test connection
       if ($this->connection->connect_error) {
-        $this->log->info('the connection to the database has been failed');
+        $this->log->info('the connection to '.$this->dbName.' has been failed');
         die('connection failed: '.$this->connection->connect_error);
       }
 
-      $this->log->info('the connection to the database was established successfully');
+      $this->log->info('the connection to '.$this->dbName.' was established successfully');
 
 }
     public function getPhase($uid) {
