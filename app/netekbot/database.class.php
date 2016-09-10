@@ -19,7 +19,7 @@
       $currentConnection = $this->openDBConnection('current_sessions');
 
       $this->log->info('executing query');
-
+      
       $sql = "SELECT current_phase FROM current_sessions WHERE uid = ".$uid;
       mysqli_query($currentConnection, $sql);
       $result = $currentConnection->query($sql);
