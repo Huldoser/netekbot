@@ -20,7 +20,7 @@
 
       // Respond
       //$message->setMessage('Did you say '.$message->getMessage().'?');
-      $response = $message->$phases.' '.$message->getUserId();
+      $response = $message->$phase.' '.$message->getUserId();
       return $response;
     }
 
