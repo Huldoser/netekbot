@@ -15,7 +15,9 @@
       $db = new database($this->log);
 
       // Get the current phase for the current user
+      $this->log->info('before phase');
       $phase = $db->getPhase($message->getUser()->getUserId());
+      $this->log->info('after phase');
 
       // Respond
       $response = $message->$phase.' '.$message->getUser()->getUserId();

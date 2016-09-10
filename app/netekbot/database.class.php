@@ -68,7 +68,8 @@
     }
 
     private function closeDBConnection($theConnection) {
-      // Close the database connection
+      $this->log->info('closing connection');
+      
       mysqli_close($this->connection);
     }
 
