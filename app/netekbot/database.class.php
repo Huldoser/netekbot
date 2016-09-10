@@ -14,11 +14,17 @@
     }
 
     public function getPhase($uid) {
+      $this->log->info('entered getPhase with uid '.$uid);
+
       $currentConnection = $this->openDBConnection('current_sessions');
 
-      $sql = "SELECT current_phase FROM `current_sessions` WHERE `uid` = ".$uid;
+      $this->log->info('executing query');
+
+      $sql = "SELECT current_phase FROM current_sessions WHERE uid = ".$uid;
       mysqli_query($currentConnection, $sql);
       $result = $currentConnection->query($sql);
+
+          $this->log->info('execution result: '.$result);
 
       // If the phase found retrun it. Otherwise set the phase to 0
       if ($result->num_rows > 0) {
