@@ -2,7 +2,7 @@
 
     $autoloaderpaths = [
             'app',
-            'app/echobot'
+            'app/netekbot'
     ];
 
     spl_autoload_extensions('.class.php,.abstract.php,.php');
