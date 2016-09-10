@@ -11,10 +11,10 @@
 
     public function __construct($tableName, $log) {
       // Define db
-      $this->dbName = $_ENV('DB_NAME');
-      $this->dbUserName = $_ENV('DB_USER_NAME');
-      $this->dbUrl = $_ENV('DB_URL');
-      $this->dbPassword = $_ENV('DB_PASSWORD');
+      $this->dbName = $_ENV['DB_NAME'];
+      $this->dbUserName = $_ENV['DB_USER_NAME'];
+      $this->dbUrl = $_ENV['DB_URL'];
+      $this->dbPassword = $_ENV['DB_PASSWORD'];
       $this->dbTableName = $tableName;
       $this->log = $log;
 
