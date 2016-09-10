@@ -24,15 +24,15 @@
       mysqli_query($currentConnection, $sql);
       $result = $currentConnection->query($sql);
 
-          $this->log->info('execution result: '.$result);
-
       // If the phase found retrun it. Otherwise set the phase to 0
       if ($result->num_rows > 0) {
+        $this->log->info('entered if. the query is not empty');
         while($row = $result->fetch_assoc()) {
           return $row["current_phase"];
         }
         $this->closeDBConnection($currentConnection);
       } else {
+        $this->log->info('the query is empty. entering setPhase');
         $this->setPhase($uid, 0);
       }
 
