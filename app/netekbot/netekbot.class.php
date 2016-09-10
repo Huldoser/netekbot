@@ -16,11 +16,11 @@
 
 
       // Get the current phase for the current user
-      $phase = $db->getPhase($message->getUser());
+      $phase = $db->getPhase((string) $message->getUser());
 
       // Respond
       //$message->setMessage('Did you say '.$message->getMessage().'?');
-      $response = $message->$phase.' '.$message->getUser();
+      $response = $message->$phase.' '.(string)$message->getUser();
       return $response;
     }
 

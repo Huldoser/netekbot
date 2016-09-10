@@ -31,7 +31,7 @@
 
 }
     public function getPhase($uid) {
-      $sql = "SELECT current_phase FROM `current_sessions` WHERE `uid`=".$uid;
+      $sql = "SELECT current_phase FROM `current_sessions` WHERE `uid` = ".$uid;
       mysqli_query($this->connection, $sql);
       $result = $this->connection->query($sql);
 
