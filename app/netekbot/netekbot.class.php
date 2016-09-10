@@ -20,7 +20,7 @@
       $this->log->info('after phase');
 
       // Respond
-      $response = $message->$phase.' '.$message->getUser()->getUserId();
+      $response = 'phase: '.$message->$phase.' '.$message->getUser()->getUserId();
       $this->log->info($response);
       return $response;
     }

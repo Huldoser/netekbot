@@ -20,7 +20,7 @@
 
       $this->log->info('executing query');
 
-      $sql = "SELECT `current_phase` FROM `current_sessions` WHERE `uid` = ".$uid;
+      $sql = "SELECT current_phase FROM current_sessions WHERE uid = ".$uid;
       mysqli_query($currentConnection, $sql);
       $result = $currentConnection->query($sql);
 
@@ -28,7 +28,7 @@
       if ($result->num_rows > 0) {
         $this->log->info('entered if. the query is not empty');
         while($row = $result->fetch_assoc()) {
-          return $row["current_phase"];
+          return $row['current_phase'];
         }
         $this->closeDBConnection($currentConnection);
       } else {

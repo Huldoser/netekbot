@@ -34,7 +34,6 @@
 
         $this->readMessage();
       }
-
     }
 
     // This is the webhook verification with facebook
