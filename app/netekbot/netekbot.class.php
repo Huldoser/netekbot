@@ -16,7 +16,7 @@
 
 
       // Get the current phase for the current user
-      $phase = $db->getPhase($message->getUid);
+      $phase = $db->getPhase($message->getUser());
 
       // Respond
       $response = $message->$phase.' '.$message->getUser();
