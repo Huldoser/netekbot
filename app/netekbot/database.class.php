@@ -23,7 +23,7 @@
 
       // Test connection
       if ($this->connection->connect_error) {
-        $this->log->info('the connection to '.$dbName' has been failed');
+        $this->log->info('the connection to '.$dbName.' has been failed');
         die('connection failed: '.$this->connection->connect_error);
       }
 
