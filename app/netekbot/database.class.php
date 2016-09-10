@@ -28,6 +28,7 @@
       }
 
       $this->log->info('the connection to '.$this->dbName.' was established successfully');
+      return $this->connction;
 
 }
     public function getPhase($uid) {
