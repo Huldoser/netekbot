@@ -27,7 +27,7 @@
         die('connection failed: '.$this->connection->connect_error);
       }
 
-      $this->log->info('the connection to '.$dbName' was established successfully');
+      $this->log->info('the connection to '.$dbName.' was established successfully');
 
 }
     public function getPhase($uid) {
