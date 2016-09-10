@@ -64,6 +64,7 @@
       } else {
         $this->log->info('the connection to '.$this->dbName.' was established successfully');
         return $this->connection;
+      }
     }
 
     private function closeDBConnection($theConnection) {
