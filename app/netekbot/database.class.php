@@ -6,7 +6,7 @@
     private $dbUserName;
     private $dbUrl;
     private $dbPassword;
-    private $dbTableName
+    private $dbTableName;
     private $log;
 
     public function __construct($tableName, $log) {
