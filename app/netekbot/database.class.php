@@ -26,10 +26,11 @@
 
       // If the phase found retrun it. Otherwise set the phase to 0
       if ($result->num_rows > 0) {
-        $this->log->info('entered if. the query is not empty');
-        while($row = $result->fetch_assoc()) {
-          return $row['current_phase'];
-        }
+        $this->log->info('the query is not empty');
+
+        $result->fetch_array();
+        return $result['current_phase'];
+        
         $this->closeDBConnection($currentConnection);
       } else {
         $this->log->info('the query is empty. entering setPhase');
@@ -43,11 +44,11 @@
       $currentConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed face to db with related uid
-      $sql = "UPDATE `current_sessions` SET `current_phase` = '".$phaseNumber."' WHERE `uid` ".$uid;
+      $sql = "UPDATE current_sessions SET current_phase = '".$phaseNumber."' WHERE uid ".$uid;
 
       // Kill connection if error occured
       if (!$this->connection->query($sql)) {
-        die('setPhase has been failed. error: '.$this->connection->connect_error);
+        die('setPhase have been failed. error: '.$this->connection->connect_error);
       } else {
         $this->connection->query($sql);
       }

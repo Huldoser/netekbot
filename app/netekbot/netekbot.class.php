@@ -15,14 +15,12 @@
       $db = new database($this->log);
 
       // Get the current phase for the current user
-      $this->log->info('before phase');
+      $this->log->info('before getPhase');
       $phase = $db->getPhase($message->getUser()->getUserId());
-      $this->log->info('after phase');
+      $this->log->info('after getPhase. the current phase for uid '.$message->getUser()->getUserId().' is '.$phase);
 
-      // Respond
-      $response = 'phase: '.$message->$phase.' '.$message->getUser()->getUserId();
-      $this->log->info($response);
-      return $response;
+      $message->setMessage('Everything is good to go =]');
+      return $message;
     }
 
   }

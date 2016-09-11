@@ -30,7 +30,7 @@
 
         $this->botAuthentication($_GET['hub_verify_token'], $_GET['hub_challenge']);
       } else {
-        $this->log->info('the bot is authenticted');
+        $this->log->info('the bot is authenticated');
 
         $this->readMessage();
       }
