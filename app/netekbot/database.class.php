@@ -67,8 +67,7 @@
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
-        $this->log->info('error occured: '.$activeConnection->connect_error);
-        die('error: '.$activeConnection->connect_error);
+        $this->log->info('error occured: '.die('error: '.$activeConnection->connect_error));
       } else {
         $activeConnection->query($sql);
         $this->log->info('the query executed seccesfully');
