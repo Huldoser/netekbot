@@ -16,6 +16,7 @@
           break;
 
         case 'סלקום':
+        case ' cellcom'
           $serviceProvider = 'cellcom';
           break;
 
