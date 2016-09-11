@@ -23,7 +23,7 @@
       switch ($phase) {
         // Checking for service provider validity
         case 0:
-          $serviceProvider = $message->getMessage());
+          $serviceProvider = $message->getMessage();
           $serviceProvider = $backend->matchProvider($serviceProvider)
 
           if ($serviceProvider === 'not_found') {
