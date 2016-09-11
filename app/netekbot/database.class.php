@@ -34,11 +34,12 @@
       } else {
         $this->closeDBConnection($activeConnection);
 
-        $this->log->info('the query is empty. entering setPhase');
-        $this->setPhase($uid, 0);
+        $this->log->info('the query is empty. new user detected. entering addUser');
+        $this->addUser($uid);
       }
     }
 
+    // This function set the phase for existing user
     public function setPhase($uid, $phaseNumber) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
@@ -47,9 +48,30 @@
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
-        die('setPhase have been failed. error: '.$activeConnection->connect_error);
+        $this->log->info('error occured: '.$activeConnection->connect_error);
+        die('error: '.$activeConnection->connect_error);
       } else {
         $activeConnection->query($sql);
+      }
+
+      $this->closeDBConnection($activeConnection);
+      $this->log->info('the query executed seccesfully');
+    }
+
+    // this function crates a new user in db and set phase to 0
+    private function addUser($uid) {
+      $activeConnection = $this->openDBConnection('current_sessions');
+
+      // Save the passed face to db with related uid
+      $sql = "INSERT INTO current_sessions (uid, current_phase) VALUES ('".$uid".', 0)";
+
+      // Kill connection if error occured
+      if (!$activeConnection->query($sql)) {
+        $this->log->info('error occured: '.$activeConnection->connect_error);
+        die('error: '.$activeConnection->connect_error);
+      } else {
+        $activeConnection->query($sql);
+        $this->log->info('the query executed seccesfully');
       }
 
       $this->closeDBConnection($activeConnection);
