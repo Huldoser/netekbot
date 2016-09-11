@@ -24,7 +24,7 @@
         // Checking for service provider validity
         case 0:
           $serviceProvider = $message->getMessage();
-          $serviceProvider = $backend->matchProvider($serviceProvider)
+          $serviceProvider = $backend->matchProvider($serviceProvider);
 
           if ($serviceProvider === 'not_found') {
             $message->setMessage('אני לא מכיר את הספק '.$serviceProvider.' וודא שהקלדת את השם תקין');
