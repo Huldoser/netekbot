@@ -6,7 +6,7 @@
     private $verificationToken;
     private $hubChallenge;
 
-    private $bot = null;
+    private $bot;
 
     public function __construct($log, $verificationToken) {
       $this->log = $log;
@@ -26,11 +26,11 @@
       $this->log->info('proccessing request');
 
       if(isset($_GET['hub_verify_token'])) {
-        $this->log->info('hub verify token is set');
+        $this->log->info('authenticating the bot');
 
         $this->botAuthentication($_GET['hub_verify_token'], $_GET['hub_challenge']);
       } else {
-        $this->log->info('hub verify token is not set');
+        $this->log->info('the bot is authenticted');
 
         $this->readMessage();
       }
@@ -47,8 +47,6 @@
 
     private function readMessage() {
       $data = json_decode(file_get_contents('php://input'), true); //php://input == POST
-      $this->log->info('POST: '.print_r($data));
-
       $messaging_events = $data['entry'][0]['messaging'];
 
       foreach((array) $messaging_events as $key => $value) {
@@ -57,7 +55,7 @@
         $sender = $event['sender'];
         $recipient = $event['recipient'];
 
-        if(isset($event['message']) && isset($event['message']['text'])) {
+        if (isset($event['message']) && isset($event['message']['text'])) {
           $text = $event['message']['text'];
 
           // Send message to the bot
@@ -65,9 +63,9 @@
           $botMessage = $this->bot->processMessage($message);
           if ($botMessage) {
             $this->sendMessage($message);
-          } else {
-            $this->log->error('error proccessing message');
           }
+        } else {
+          $this->log->error('error proccessing message');
         }
       }
     }
