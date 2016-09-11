@@ -32,10 +32,12 @@
 
         $this->closeDBConnection($activeConnection);
       } else {
-        $this->closeDBConnection($activeConnection);
-
         $this->log->info('the query is empty. new user detected. entering addUser');
+        $this->closeDBConnection($activeConnection);
         $this->addUser($uid);
+
+        // Execute getPhase again - now it will find the uid
+        $this->getPhase($uid);
       }
     }
 
