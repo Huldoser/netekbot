@@ -23,19 +23,18 @@
       switch ($phase) {
         // Checking for service provider validity
         case 0:
-          $serviceprovider = array('', $message->getMessage());
+          $serviceProvider = $message->getMessage());
+          $serviceProvider = $backend->matchProvider($serviceProvider)
 
-          if ($backend->matchProvider($serviceprovider) === 'not_found') {
-            $message->setMessage('אני לא מכיר את הספק '.$serviceprovider[1].' וודא שהקלדת את השם תקין');
-            return $message;
+          if ($serviceProvider === 'not_found') {
+            $message->setMessage('אני לא מכיר את הספק '.$serviceProvider.' וודא שהקלדת את השם תקין');
             break;
           } else {
-            // save service provider to db
+              $message->setMessage('על מנת להתנתק מ'.$serviceProvider.' אבקש ממך כמה פרטים הכרחיים');
           }
-
-
-
       }
+
+      return $message;
 
       // $message->setMessage('We are good to go! check server logs for more information');
       // return $message;

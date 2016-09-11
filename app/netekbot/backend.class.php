@@ -1,54 +1,52 @@
 <?php
 
   class backend {
+    private log;
 
-    public function matchProvider($serviceprovider) {
+    public function __construct($log) {
+      $this->log = $log;
+    }
 
-      switch ($serviceprovider[1]) {
+    public function matchProvider($serviceProvider) {
+
+      switch ($serviceProvider) {
         case 'פלאפון':
         case 'pelephone':
         case 'פלא-פון':
-          $serviceprovider[0] = 'pelephone';
-          $serviceprovider[1] = 'פלאפון';
+          $serviceProvider = 'pelephone';
           break;
 
         case 'סלקום':
-          $serviceprovider[0] = 'cellcom';
-          $serviceprovider[1] = 'סלקום';
+          $serviceProvider = 'cellcom';
           break;
 
         case 'פרטנר':
         case 'partner':
         case 'אורנג':
-          $serviceprovider[0] = 'partner';
-          $serviceprovider[1] = 'פרטנר';
+          $serviceProvider = 'partner';
           break;
 
         case 'רמי לוי':
         case 'rami levi':
-          $serviceprovider[0] = 'rami_levi';
-          $serviceprovider[1] = 'רמי לוי';
+          $serviceProvider = 'rami_levi';
           break;
 
         case 'גולן טלאקום':
         case 'גולן טלקום':
         case 'גולן':
-          $serviceprovider[0] = 'golan_telecom';
-          $serviceprovider[1] = 'גולן טלקום';
+          $serviceProvider = 'golan_telecom';
           break;
 
         case 'hot mobile':
         case 'הוט מובייל':
-          $serviceprovider[0] = 'hot_mobile';
-          $serviceprovider[1] = 'הוט מובייל';
+          $serviceProvider = 'hot_mobile';
           break;
 
         default:
-          $serviceprovider[0] = 'not_found';
-          $serviceprovider[1] = 'not_found';
+          $serviceProvider = 'not_found';
       }
 
-      return $serviceprovider;
+      return $serviceProvider;
     }
 
   }
