@@ -63,7 +63,7 @@
       $activeConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed face to db with related uid
-      $sql = "INSERT INTO current_sessions (uid, current_phase) VALUES ('".$uid."', 0)";
+      $sql = "INSERT INTO current_sessions (id, uid, current_phase) VALUES ('".$activeConnection->insert_id.", '"".$uid."', 0)";
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
