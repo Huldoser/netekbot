@@ -37,7 +37,7 @@
         $this->addUser($uid);
 
         // Execute getPhase again - now it will find the uid
-        $this->getPhase($uid);
+        return $this->getPhase($uid);
       }
     }
 
