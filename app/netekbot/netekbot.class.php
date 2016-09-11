@@ -27,10 +27,10 @@
           $serviceProvider = $backend->matchProvider($serviceProvider);
 
           if ($serviceProvider === 'not_found') {
-            $message->setMessage('אני לא מכיר את הספק '.$serviceProvider.' וודא שהקלדת את השם תקין');
+            $message->setMessage('אני לא מכיר את הספק '.$message->getMessage.' וודא שהקלדת את השם תקין');
             break;
           } else {
-              $message->setMessage('על מנת לנתק אותך מ '.$message->getMessage().' אבקש ממך כמה פרטים הכרחיים');
+              $message->setMessage('על מנת לנתק אותך מ'.$message->getMessage' אבקש ממך כמה פרטים הכרחיים');
           }
       }
 
