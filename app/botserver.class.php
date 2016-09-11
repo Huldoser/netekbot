@@ -49,25 +49,25 @@
       $data = json_decode(file_get_contents('php://input'), true); //php://input == POST
       $messaging_events = $data['entry'][0]['messaging'];
 
-      foreach((array) $messaging_events as $key => $value) {
+      //foreach((array) $messaging_events as $key => $value) {
+      $value = $messaging_events[0];
+      $event = $value;
+      $sender = $event['sender'];
+      $recipient = $event['recipient'];
 
-        $event = $value;
-        $sender = $event['sender'];
-        $recipient = $event['recipient'];
+      if (isset($event['message']) && isset($event['message']['text'])) {
+        $text = $event['message']['text'];
 
-        if (isset($event['message']) && isset($event['message']['text'])) {
-          $text = $event['message']['text'];
-
-          // Send message to the bot
-          $message = new message($text, new user($sender['id']));
-          $botMessage = $this->bot->processMessage($message);
-          if ($botMessage) {
-            $this->sendMessage($message);
-          }
-        } else {
-          $this->log->error('error proccessing message');
+        // Send message to the bot
+        $message = new message($text, new user($sender['id']));
+        $botMessage = $this->bot->processMessage($message);
+        if ($botMessage) {
+          $this->sendMessage($message);
         }
+      } else {
+        $this->log->error('error proccessing message');
       }
+      //}
     }
 
     public function sendMessage($message) {
