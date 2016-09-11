@@ -28,9 +28,9 @@
       if ($result->num_rows > 0) {
         $this->log->info('the query is not empty');
 
-        $result->fetch_array();
-        return $result['current_phase'];
-        
+        $data = $result->fetch_array();
+        return $data['current_phase'];
+
         $this->closeDBConnection($currentConnection);
       } else {
         $this->log->info('the query is empty. entering setPhase');
