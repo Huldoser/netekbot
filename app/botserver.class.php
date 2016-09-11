@@ -48,11 +48,11 @@
     private function readMessage() {
 
       $data = json_decode(file_get_contents('php://input'), true); //php://input == POST
-      //$messaging_events = $data['entry'][0]['messaging'];
+      $messaging_events = $data['entry'][0]['messaging'];
 
       //foreach((array) $messaging_events as $key => $value) {
 
-        $value = $data['entry'][0]['messaging'];
+        $value = $messaging_events[0];
 
         $event = $value;
         $sender = $event['sender'];
