@@ -68,11 +68,26 @@
       $sql = "INSERT INTO current_sessions (uid, current_phase) VALUES ('".$uid."', 0)";
 
       // Kill connection if error occured
-      if (!$activeConnection->query($sql)) {
+      if ($activeConnection->query($sql) !== true) {
         $this->log->info('error occured: '.$activeConnection->connect_error);
         die('error: '.$activeConnection->connect_error);
       } else {
-        $activeConnection->query($sql);
+        $this->log->info('the query executed seccesfully');
+      }
+
+      $this->closeDBConnection($activeConnection);
+    }
+
+    public function setServiceProvider($uid, $serviceProvider) {
+      $activeConnection = $this->openDBConnection('current_sessions');
+
+      $sql = "UPDATE current_sessions SET service_provider = '".$serviceProvider."' WHERE uid = '".$uid."'";
+
+      // Kill connection if error occured
+      if ($activeConnection->query($sql) !== true) {
+        $this->log->info('error occured: '.$activeConnection->connect_error);
+        die('error: '.$activeConnection->connect_error);
+      } else {
         $this->log->info('the query executed seccesfully');
       }
 
