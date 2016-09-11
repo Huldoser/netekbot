@@ -63,11 +63,12 @@
       $activeConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed face to db with related uid
-      $sql = "INSERT INTO current_sessions (id, uid, current_phase) VALUES ('".$uid."', 0)";
+      $sql = "INSERT INTO current_sessions (uid, current_phase) VALUES ('".$uid."', 0)";
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
-        $this->log->info('error occured: '.die('error: '.$activeConnection->connect_error));
+        $this->log->info('error occured: '.$activeConnection->connect_error);
+        die('error: '.$activeConnection->connect_error);
       } else {
         $activeConnection->query($sql);
         $this->log->info('the query executed seccesfully');
