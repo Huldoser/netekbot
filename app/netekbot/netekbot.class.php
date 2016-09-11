@@ -30,7 +30,7 @@
             $message->setMessage('אני לא מכיר את הספק '.$serviceProvider.' וודא שהקלדת את השם תקין');
             break;
           } else {
-              $message->setMessage('על מנת לנתק אותך מ '.$serviceProvider.' אבקש ממך כמה פרטים הכרחיים');
+              $message->setMessage('על מנת לנתק אותך מ '.$message->getMessage().' אבקש ממך כמה פרטים הכרחיים');
           }
       }
 
