@@ -47,7 +47,7 @@
 
     private function readMessage() {
       $data = json_decode(file_get_contents('php://input'), true); //php://input == POST
-      $this->log->info('POST: '.$data);
+      $this->log->info('POST: '.print_r($data));
 
       $messaging_events = $data['entry'][0]['messaging'];
 
