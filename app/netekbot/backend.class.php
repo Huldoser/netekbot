@@ -1,7 +1,7 @@
 <?php
 
   class backend {
-    private log;
+    private $log;
 
     public function __construct($log) {
       $this->log = $log;
