@@ -16,44 +16,43 @@
     public function getPhase($uid) {
       $this->log->info('entered getPhase with uid '.$uid);
 
-      $currentConnection = $this->openDBConnection('current_sessions');
-
+      $activeConnection = $this->openDBConnection('current_sessions');
       $this->log->info('executing query');
 
       $sql = "SELECT current_phase FROM current_sessions WHERE uid = ".$uid;
-      mysqli_query($currentConnection, $sql);
-      $result = $currentConnection->query($sql);
+      mysqli_query($activeConnection, $sql);
+      $result = $activeConnection->query($sql);
 
-      // If the phase found retrun it. Otherwise set the phase to 0
+      // If the phase found return it. Otherwise set the phase to 0
       if ($result->num_rows > 0) {
         $this->log->info('the query is not empty');
 
         $data = $result->fetch_array();
         return $data['current_phase'];
 
-        $this->closeDBConnection($currentConnection);
+        $this->closeDBConnection($activeConnection);
       } else {
+        $this->closeDBConnection($activeConnection);
+
         $this->log->info('the query is empty. entering setPhase');
         $this->setPhase($uid, 0);
       }
-
-      $this->closeDBConnection($currentConnection);
     }
 
     public function setPhase($uid, $phaseNumber) {
-      $currentConnection = $this->openDBConnection('current_sessions');
+      $activeConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed face to db with related uid
-      $sql = "UPDATE current_sessions SET current_phase = '".$phaseNumber."' WHERE uid ".$uid;
+      $sql = "UPDATE current_sessions SET current_phase = ".$phaseNumber." WHERE uid = ".$uid;
 
       // Kill connection if error occured
-      if (!$this->connection->query($sql)) {
-        die('setPhase have been failed. error: '.$this->connection->connect_error);
+      if (!$this->activeConnection->query($sql)) {
+        die('setPhase have been failed. error: '.$this->activeConnection->connect_error);
       } else {
-        $this->connection->query($sql);
+        $this->activeConnection->query($sql);
       }
 
-      $this->closeDBConnection($currentConnection);
+      $this->closeDBConnection($activeConnection);
     }
 
     private function openDBConnection($tableName) {
