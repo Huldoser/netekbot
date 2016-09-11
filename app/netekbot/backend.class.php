@@ -8,7 +8,6 @@
     }
 
     public function matchProvider($serviceProvider) {
-
       switch ($serviceProvider) {
         case 'פלאפון':
         case 'pelephone':

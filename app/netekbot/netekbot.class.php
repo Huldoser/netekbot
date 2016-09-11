@@ -12,7 +12,7 @@
       $this->log->info('processing the message');
 
       // Declerations and Initializations
-      $backend = new backend($this->$log);
+      $backend = new backend($this->log);
       $db = new database($this->log);
 
       // Get the current phase for the current user
