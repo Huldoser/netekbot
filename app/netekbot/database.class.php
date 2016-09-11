@@ -46,10 +46,10 @@
       $sql = "UPDATE current_sessions SET current_phase = ".$phaseNumber." WHERE uid = ".$uid;
 
       // Kill connection if error occured
-      if (!$this->activeConnection->query($sql)) {
-        die('setPhase have been failed. error: '.$this->activeConnection->connect_error);
+      if (!$activeConnection->query($sql)) {
+        die('setPhase have been failed. error: '.$activeConnection->connect_error);
       } else {
-        $this->activeConnection->query($sql);
+        $activeConnection->query($sql);
       }
 
       $this->closeDBConnection($activeConnection);
