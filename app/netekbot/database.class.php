@@ -170,6 +170,9 @@
       // Create connection
       $this->connection = new mysqli($this->dbUrl, $this->dbUserName, $this->dbPassword, $this->dbName);
 
+      // Set charset to UTF8
+      mysqli_set_charset($this->connection,"utf8");
+
       // Test connection
       if ($this->connection->connect_error) {
         $this->log->info('the connection to '.$this->dbName.' has been failed');
