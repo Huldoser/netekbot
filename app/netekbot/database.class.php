@@ -89,7 +89,7 @@
       $result = $activeConnection->query($sql);
 
       // If the field found return it. Otherwise set the stage to 0
-      if ($result->num_rows > 0) {
+      if ($result['current_field'] === null) {
         $this->log->info('the query is not empty');
 
         $data = $result->fetch_array();
@@ -97,7 +97,7 @@
 
         $this->closeDBConnection($activeConnection);
       } else {
-        $this->log->info('the query is empty. no current_stage has been set yet');
+        $this->log->info('the query is empty. no current_field has been set yet');
         $this->closeDBConnection($activeConnection);
         return 'empty';
       }
