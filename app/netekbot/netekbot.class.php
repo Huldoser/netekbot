@@ -70,7 +70,7 @@
             $this->log->info('the field is empty');
 
             if ($sameMessage) {
-              $message->setMessage($backend->getQuestionByFieldName($message->getMessage().$backend->getNextField($field)));
+              $message->setMessage($message->getMessage().$backend->getQuestionByFieldName($backend->getNextField($field)));
             } else {
               $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)));
             }
@@ -100,9 +100,6 @@
       }
 
       return $message;
-
-      // $message->setMessage('We are good to go! check server logs for more information');
-      // return $message;
     }
 
   }
