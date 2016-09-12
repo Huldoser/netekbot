@@ -46,8 +46,9 @@
             $db->setServiceProvider($uid, $serviceProvider);
             $db->setPhase($uid, 1);
 
-            $message->setMessage('על מנת לנתק אותך מ'.$usersMessage
-              .' אצטרך ממך מספר פרטים.'.chr(10).chr(10).'חשוב לי לציין שהפרטיות שלך חשובה לי מאוד ולכן אני מתחייב לא לשמור ולא לשתף את הפרטים המזהים שלך עם אף גורם צד ג.');
+            $message->setMessage('בחרת להתנתק מ'.$usersMessage.chr(10)
+              .'כדי לעזור לך להתנתק אני צריך מספר פרטים'.'.'.chr(10).chr(10)
+              .'הפרטיות שלך חשובה לי מאוד ולכן אני מתחייב לא לשמור ולא לשתף אף פרט שלך עם אף גורם צד ג');
 
             $sameMessage = true;
             // NOTICE! No break here for the fall-through behavior.
