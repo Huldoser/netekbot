@@ -78,9 +78,9 @@
         case 'last_digits':
           $word = '4 '.'ספרות אחרונות של אמצעי התשלום';
           break;
+      }
 
         return $word;
-      }
     }
 
     public function getNextField($currentFieldName) {
