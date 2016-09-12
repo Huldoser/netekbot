@@ -60,7 +60,7 @@
           // Check if its the same message set bofore. If it is add two new lines and instructions
           if ($sameMessage) {
             $message->setMessage($message->getMessage().chr(10).chr(10)
-              .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק');
+              .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק'.' ');
           }
 
           // Check if the current field is empty or not done
@@ -69,20 +69,25 @@
             $this->log->info('the field is empty');
 
             if ($sameMessage) {
-              $message->setMessage($message->getMessage().$backend->getNextField($field).'?');
+              $message->setMessage($backend->getHebrewTranslation($message->getMessage().$backend->getNextField($field)).'?');
             } else {
-              $message->setMessage($backend->getNextField($field).'?');
+              $message->setMessage($backend->getHebrewTranslation($backend->getNextField($field)).'?');
             }
             $db->setCurrentField($uid, $backend->getNextField($field));
             $db->setColumnValue($uid, 'first_name', $usersMessage);
 
           } else if ($field !== 'done') {
             $this->log->info('the field is '.$field);
-            $message->setMessage($backend->getNextField($field).'?');
+
+            if ($field !== 'last_digits') {
+              $message->setMessage($backend->getHebrewTranslation($backend->getNextField($field)).'?');
+            }
+
             $db->setCurrentField($uid, $backend->getNextField($field));
             $db->setColumnValue($uid, $field, $usersMessage);
+
           } else {
-            $message->setMessage('אוקי, קיבלתי ממך את כל מה שאני צריך. לפני שאשלח את הודעת הדואר האלקטרוני ארצה רק לוודא שכל הפרטים נכוניםֿ');
+
             $this->log->info('the field is done');
             $db->setPhase($uid, 2);
           }
@@ -90,7 +95,7 @@
           break;
 
         case 2:
-        $message->setMessage('case 2!');
+          $message->setMessage('אוקי, קיבלתי ממך את כל מה שאני צריך. לפני שאשלח את הודעת הדואר האלקטרוני ארצה רק לוודא שכל הפרטים נכוניםֿ');
       }
 
       return $message;
