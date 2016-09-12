@@ -56,7 +56,7 @@
           break;
 
         case 'last_name':
-          $word = 'מה שם המשפה שלמה';
+          $word = 'מה שם המשפחה שלך';
           break;
 
         case 'email_address':
@@ -80,7 +80,7 @@
           break;
       }
 
-        return $word;
+        return $word.'?';
     }
 
     public function getNextField($currentFieldName) {

@@ -46,11 +46,9 @@
             $db->setServiceProvider($uid, $serviceProvider);
             $db->setPhase($uid, 1);
 
-            // $message->setMessage('בחרת להתנתק מ'.$usersMessage.chr(10)
-            //   .'כדי לעזור לך להתנתק אני צריך מספר פרטים'.'.'.chr(10).chr(10)
-            //   .'הפרטיות שלך חשובה לי מאוד ולכן אני מתחייב לא לשמור ולא לשתף אף פרט שלך עם אף גורם צד ג');
-
-            $message->setMessage('test');
+            $message->setMessage('בחרת להתנתק מ'.$usersMessage.chr(10)
+              .'כדי לעזור לך להתנתק אני צריך מספר פרטים'.'.'.chr(10).chr(10)
+              .'הפרטיות שלך חשובה לי מאוד ולכן אני מתחייב לא לשמור ולא לשתף אף פרט שלך עם אף גורם צד ג');
 
             $sameMessage = true;
             // NOTICE! No break here for the fall-through behavior.
@@ -72,9 +70,9 @@
             $this->log->info('the field is empty');
 
             if ($sameMessage) {
-              $message->setMessage($backend->getQuestionByFieldName($message->getMessage().$backend->getNextField($field).'?'));
+              $message->setMessage($backend->getQuestionByFieldName($message->getMessage().$backend->getNextField($field)));
             } else {
-              $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)).'?');
+              $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)));
             }
             $db->setCurrentField($uid, $backend->getNextField($field));
             $db->setColumnValue($uid, 'first_name', $usersMessage);
@@ -83,7 +81,7 @@
             $this->log->info('the field is '.$field);
 
             if ($field !== 'last_digits') {
-              $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)).'?');
+              $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)));
             }
 
             $db->setCurrentField($uid, $backend->getNextField($field));
