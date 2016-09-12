@@ -94,7 +94,7 @@
       } else {
         for ($i = 0; $i < sizeof($fields); $i++) {
           if ($currentFieldName === $fields[$i]) {
-            return $fields[$i] + 1;
+            return $fields[$i + 1];
           }
         }
       }
