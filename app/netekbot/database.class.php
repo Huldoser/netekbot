@@ -45,7 +45,7 @@
     public function setPhase($uid, $phaseNumber) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
-      // Save the passed face to db with related uid
+      // Save the passed phase to db with related uid
       $sql = "UPDATE current_sessions SET current_phase = ".$phaseNumber." WHERE uid = ".$uid;
 
       // Kill connection if error occured
@@ -57,7 +57,7 @@
       }
 
       $this->closeDBConnection($activeConnection);
-      $this->log->info('the query executed seccesfully');
+      $this->log->info('setPhase executed seccesfully');
     }
 
     // this function crates a new user in db and set phase to 0
@@ -72,10 +72,53 @@
         $this->log->info('error occured: '.$activeConnection->connect_error);
         die('error: '.$activeConnection->connect_error);
       } else {
-        $this->log->info('the query executed seccesfully');
+        $this->log->info('addUser executed seccesfully');
       }
 
       $this->closeDBConnection($activeConnection);
+    }
+
+    public function getField($uid) {
+      $this->log->info('entered getField with uid '.$uid);
+
+      $activeConnection = $this->openDBConnection('current_sessions');
+      $this->log->info('executing query');
+
+      $sql = "SELECT current_stage FROM current_sessions WHERE uid = ".$uid;
+      mysqli_query($activeConnection, $sql);
+      $result = $activeConnection->query($sql);
+
+      // If the field found return it. Otherwise set the stage to 0
+      if ($result->num_rows > 0) {
+        $this->log->info('the query is not empty');
+
+        $data = $result->fetch_array();
+        return $data['current_field'];
+
+        $this->closeDBConnection($activeConnection);
+      } else {
+        $this->log->info('the query is empty. no current_stage has been set yet');
+        $this->closeDBConnection($activeConnection);
+        return 'empty';
+      }
+    }
+
+    public function setField($uid, $fieldName) {
+      $activeConnection = $this->openDBConnection('current_sessions');
+
+      // Save the passed field as current_field with related uid
+      $sql = "UPDATE current_sessions SET current_field = ".$stageNumber." WHERE uid = ".$uid;
+
+      // Kill connection if error occured
+      if (!$activeConnection->query($sql)) {
+        $this->log->info('error occured: '.$activeConnection->connect_error);
+        die('error: '.$activeConnection->connect_error);
+      } else {
+        $activeConnection->query($sql);
+      }
+
+      $this->closeDBConnection($activeConnection);
+      $this->log->info('setField executed seccesfully');
     }
 
     public function setServiceProvider($uid, $serviceProvider) {

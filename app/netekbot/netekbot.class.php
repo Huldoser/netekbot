@@ -12,9 +12,11 @@
       $this->log->info('processing the message');
 
       // Declerations and Initializations
+      $sameMessage = false;
       $backend = new backend($this->log);
       $db = new database($this->log);
       $uid = $message->getUser()->getUserId();
+      $field;
 
       // Get the current phase for the current user
       $this->log->info('before getPhase');
@@ -24,6 +26,8 @@
       switch ($phase) {
         // Checking for service provider validity if found savinf to db and updating phase to 1
         case 0:
+          $this->log->info('entered phase 0');
+
           $serviceProvider = $message->getMessage();
           $serviceProvider = $backend->matchProvider($serviceProvider);
 
@@ -42,7 +46,29 @@
 
             $message->setMessage('על מנת לנתק אותך מ'.$message->getMessage()
               .' אצטרך ממך מספר פרטים.'.chr(10).chr(10).'חשוב לי לציין שהפרטיות שלך חשובה לי מאוד ולכן אני מתחייב לא לשמור ולא לשתף את הפרטים המזהים שלך עם אף גורם צד ג.');
+
+            $sameMessage = true;
+            // NOTICE! No break here for the fall-through behavior.
           }
+
+        // Loop throgh all the needed fields
+        case 1:
+        $this->log->info('entered phase 1');
+
+        // Check if its the same message set bofore. If it is add two new lines and instructions
+        if ($sameMessage) {
+          $message->setMessage($message->$getMessage().chr(10).chr(10)
+            .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק');
+        }
+
+        // get the field from db and check what to ask the user for
+        $field = $db->getField($uid);
+        if ($sameMessage) {
+        $message->setMessage($message->getMessage().$backend->getFieldName($field));
+        } else {
+          $message->setMessage($backend->getFieldName($field));
+        }
+
       }
 
       return $message;

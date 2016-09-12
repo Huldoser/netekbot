@@ -12,34 +12,34 @@
         case 'פלאפון':
         case 'pelephone':
         case 'פלא-פון':
-          $serviceProvider = 'pelephone';
+          $serviceProvider = 'פלאפון';
           break;
 
         case 'סלקום':
         case ' cellcom':
-          $serviceProvider = 'cellcom';
+          $serviceProvider = 'סלקום';
           break;
 
         case 'פרטנר':
         case 'partner':
         case 'אורנג':
-          $serviceProvider = 'partner';
+          $serviceProvider = 'פרטנר';
           break;
 
         case 'רמי לוי':
         case 'rami levi':
-          $serviceProvider = 'rami_levi';
+          $serviceProvider = 'רמי לוי';
           break;
 
         case 'גולן טלאקום':
         case 'גולן טלקום':
         case 'גולן':
-          $serviceProvider = 'golan_telecom';
+          $serviceProvider = 'גולן טלקום';
           break;
 
         case 'hot mobile':
         case 'הוט מובייל':
-          $serviceProvider = 'hot_mobile';
+          $serviceProvider = 'הוט מובייל';
           break;
 
         default:
@@ -47,6 +47,58 @@
       }
 
       return $serviceProvider;
+    }
+
+    public function getHebrewTranslation($word) {
+      switch ($word) {
+        case 'first_name':
+          $word = 'שם פרטי';
+          break;
+
+        case 'last_name':
+          $word = 'שם משפחה';
+          break;
+
+        case 'email_address':
+         $word = 'כתובת מייל';
+         break;
+
+        case 'phone_number':
+          $word = 'מספר טלפון לניתוק';
+          break;
+
+        case 'settlement':
+          $word = 'ישוב מגורים';
+          break;
+
+        case 'address':
+          $word = 'כתובת מגורים';
+          break;
+
+        case 'last_digits':
+          $word = '4 '.'ספרות אחרונות של אמצעי התשלום';
+          break;
+
+        return $word;
+      }
+    }
+
+    public function getNextField($currentFieldName) {
+      $fields = array('first_name', 'last_name', 'id_number', 'email_address', 'phone_number',
+        'settlement', 'address', 'last_digits', 'done');
+
+      if ($currentFiledName === 'last_digits') {
+        return 'done';
+      } else if ($currentFieldName === 'empty') {
+        return $fields[0];
+      }
+      } else {
+        for ($i = 0; $i < sizeof($fields); $i++) {
+          if ($currentFieldName === $fields[$i]) {
+            return $fields[$i] + 1;
+          }
+        }
+      }
     }
 
   }
