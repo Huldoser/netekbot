@@ -60,7 +60,7 @@
           // Check if its the same message set bofore. If it is add two new lines and instructions
           if ($sameMessage) {
             $message->setMessage($message->getMessage().chr(10).chr(10)
-              .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק'.':'.chr(10).chr(10);
+              .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק'.':'.chr(10).chr(10));
           }
 
           // Check if the current field is empty or not done
