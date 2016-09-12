@@ -82,6 +82,8 @@
             $db->setPhase($uid, 2);
           }
 
+          break;
+
         case 2:
         $message->setMessage('case 2!');
       }
