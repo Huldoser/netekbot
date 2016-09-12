@@ -49,34 +49,34 @@
       return $serviceProvider;
     }
 
-    public function getHebrewTranslation($word) {
+    public function getQuestionByFieldName($fieldName) {
       switch ($word) {
         case 'first_name':
-          $word = 'שם פרטי';
+          $word = 'מה שמך הפרטי';
           break;
 
         case 'last_name':
-          $word = 'שם משפחה';
+          $word = 'מה שם המשפה שלמה';
           break;
 
         case 'email_address':
-         $word = 'כתובת מייל';
+         $word = 'כדי שאוכל לשלוח לך העתק של הבקשה אני צריך את כתובת המייל שלך';
          break;
 
         case 'phone_number':
-          $word = 'מספר טלפון לניתוק';
+          $word = 'מה המספר אותו תרצה לנתק';
           break;
 
         case 'settlement':
-          $word = 'ישוב מגורים';
+          $word = 'באיזה ישוב אתה גר';
           break;
 
         case 'address':
-          $word = 'כתובת מגורים';
+          $word = 'מה מספר הבית שלך ומספר הדירה';
           break;
 
         case 'last_digits':
-          $word = '4 '.'ספרות אחרונות של אמצעי התשלום';
+          $word = 'מה הם ארבעת הספרות האחרונות של אמצעי התשלום שבאמצעותו אתה משלם לספק';
           break;
       }
 

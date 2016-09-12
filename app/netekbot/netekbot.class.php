@@ -60,7 +60,7 @@
           // Check if its the same message set bofore. If it is add two new lines and instructions
           if ($sameMessage) {
             $message->setMessage($message->getMessage().chr(10).chr(10)
-              .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק'.' ');
+              .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק'.':'.chr(10).chr(10);
           }
 
           // Check if the current field is empty or not done
@@ -69,9 +69,9 @@
             $this->log->info('the field is empty');
 
             if ($sameMessage) {
-              $message->setMessage($backend->getHebrewTranslation($message->getMessage().$backend->getNextField($field)).'?');
+              $message->setMessage($backend->getQuestionByFieldName($message->getMessage().$backend->getNextField($field).'?'));
             } else {
-              $message->setMessage($backend->getHebrewTranslation($backend->getNextField($field)).'?');
+              $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)).'?');
             }
             $db->setCurrentField($uid, $backend->getNextField($field));
             $db->setColumnValue($uid, 'first_name', $usersMessage);
@@ -80,7 +80,7 @@
             $this->log->info('the field is '.$field);
 
             if ($field !== 'last_digits') {
-              $message->setMessage($backend->getHebrewTranslation($backend->getNextField($field)).'?');
+              $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)).'?');
             }
 
             $db->setCurrentField($uid, $backend->getNextField($field));
