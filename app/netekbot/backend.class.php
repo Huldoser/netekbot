@@ -91,7 +91,6 @@
         return 'done';
       } else if ($currentFieldName === 'empty') {
         return $fields[0];
-      }
       } else {
         for ($i = 0; $i < sizeof($fields); $i++) {
           if ($currentFieldName === $fields[$i]) {
