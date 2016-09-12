@@ -58,7 +58,7 @@
 
           // Check if its the same message set bofore. If it is add two new lines and instructions
           if ($sameMessage) {
-            $message->setMessage($message->$getMessage().chr(10).chr(10)
+            $message->setMessage($message->getMessage().chr(10).chr(10)
               .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק');
             }
 
@@ -79,8 +79,8 @@
               $db->setPhase($uid, 2);
             }
 
-          case 2:
-          $message->setMessage('case 2!');
+        case 2:
+        $message->setMessage('case 2!');
       }
 
       return $message;
