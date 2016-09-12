@@ -57,7 +57,7 @@
       }
 
       $this->closeDBConnection($activeConnection);
-      $this->log->info('setPhase executed seccesfully');
+      $this->log->info('setPhase executed succesfully');
     }
 
     // this function crates a new user in db and set phase to 0
@@ -72,7 +72,7 @@
         $this->log->info('error occured: '.$activeConnection->connect_error);
         die('error: '.$activeConnection->connect_error);
       } else {
-        $this->log->info('addUser executed seccesfully');
+        $this->log->info('addUser executed succesfully');
       }
 
       $this->closeDBConnection($activeConnection);
@@ -88,7 +88,7 @@
       mysqli_query($activeConnection, $sql);
       $result = $activeConnection->query($sql);
 
-      // If the field found return it. Otherwise set the stage to 0
+      // If the field found return it. Otherwise set the current_field to empty
       if ($result->num_rows > 0) {
         $this->log->info('the query is not empty');
 
@@ -122,14 +122,14 @@
       }
 
       $this->closeDBConnection($activeConnection);
-      $this->log->info('setCurrentField executed seccesfully');
+      $this->log->info('setCurrentField executed succesfully');
     }
 
     public function setColumnValue($uid, $columnName, $newValue) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed field as current_field with related uid
-      $sql = "UPDATE current_sessions SET ".$columnName." = '".$newValue."',  WHERE uid = '".$uid."'";
+      $sql = "UPDATE current_sessions SET ".$columnName." = '".$newValue."' WHERE uid = '".$uid."'";
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
@@ -140,7 +140,7 @@
       }
 
       $this->closeDBConnection($activeConnection);
-      $this->log->info('setColumnValue executed seccesfully');
+      $this->log->info('setColumnValue executed succesfully');
     }
 
     public function setServiceProvider($uid, $serviceProvider) {
@@ -153,7 +153,7 @@
         $this->log->info('error occured: '.$activeConnection->connect_error);
         die('error: '.$activeConnection->connect_error);
       } else {
-        $this->log->info('the query executed seccesfully');
+        $this->log->info('the query executed succesfully');
       }
 
       $this->closeDBConnection($activeConnection);
