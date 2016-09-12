@@ -17,6 +17,7 @@
       $db = new database($this->log);
       $uid = $message->getUser()->getUserId();
       $field;
+      $fieldName;
 
       // Get the current phase for the current user
       $this->log->info('before getPhase');
@@ -53,22 +54,33 @@
 
         // Loop throgh all the needed fields
         case 1:
-        $this->log->info('entered phase 1');
+          $this->log->info('entered phase 1');
 
-        // Check if its the same message set bofore. If it is add two new lines and instructions
-        if ($sameMessage) {
-          $message->setMessage($message->$getMessage().chr(10).chr(10)
-            .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק');
-        }
+          // Check if its the same message set bofore. If it is add two new lines and instructions
+          if ($sameMessage) {
+            $message->setMessage($message->$getMessage().chr(10).chr(10)
+              .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק');
+            }
 
-        // get the field from db and check what to ask the user for
-        $field = $db->getField($uid);
-        if ($sameMessage) {
-        $message->setMessage($message->getMessage().$backend->getFieldName($field));
-        } else {
-          $message->setMessage($backend->getFieldName($field));
-        }
+            // Check if the current field is empty or not done
+            $field = $db->getCurrentField($uid);
+            if ($field === 'empty') {
+              if ($sameMessage) {
+                $message->setMessage($message->getMessage().$backend->getNextField($field).'?');
+                $db->setCurrentField($uid, $backend->getNextField($field));
+              } else {
+                $message->setMessage($backend->getNextField($field).'?');
+                $db->setCurrentField($uid, $backend->getNextField($field));
+              }
+            } else if ($field !== 'done') {
+              $message->setMessage($backend->getNextField($field).'?');
+              $db->setCurrentField($uid, $backend->getNextField($field));
+            } else {
+              $db->setPhase($uid, 2);
+            }
 
+          case 2:
+          $message->setMessage('case 2!');
       }
 
       return $message;

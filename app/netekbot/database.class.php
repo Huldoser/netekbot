@@ -78,13 +78,13 @@
       $this->closeDBConnection($activeConnection);
     }
 
-    public function getField($uid) {
+    public function getCurrentField($uid) {
       $this->log->info('entered getField with uid '.$uid);
 
       $activeConnection = $this->openDBConnection('current_sessions');
       $this->log->info('executing query');
 
-      $sql = "SELECT current_stage FROM current_sessions WHERE uid = ".$uid;
+      $sql = "SELECT current_field FROM current_sessions WHERE uid = ".$uid;
       mysqli_query($activeConnection, $sql);
       $result = $activeConnection->query($sql);
 
@@ -103,11 +103,11 @@
       }
     }
 
-    public function setField($uid, $fieldName) {
+    public function setCurrentField($uid, $fieldName) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed field as current_field with related uid
-      $sql = "UPDATE current_sessions SET current_field = ".$stageNumber." WHERE uid = ".$uid;
+      $sql = "UPDATE current_sessions SET current_field = ".$fieldName." WHERE uid = ".$uid;
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
@@ -118,7 +118,7 @@
       }
 
       $this->closeDBConnection($activeConnection);
-      $this->log->info('setField executed seccesfully');
+      $this->log->info('setCurrentField executed seccesfully');
     }
 
     public function setServiceProvider($uid, $serviceProvider) {
