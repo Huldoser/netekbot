@@ -107,11 +107,11 @@
       }
     }
 
-    public function setCurrentField($uid, $fieldName) {
+    public function setCurrentField($uid, $newValue) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed field as current_field with related uid
-      $sql = "UPDATE current_sessions SET current_field = '".$fieldName."' WHERE uid = '".$uid."'";
+      $sql = "UPDATE current_sessions SET current_field = '".$newValue."'  WHERE uid = '".$uid."'";
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
@@ -123,6 +123,24 @@
 
       $this->closeDBConnection($activeConnection);
       $this->log->info('setCurrentField executed seccesfully');
+    }
+
+    public function setColumnValue($uid, $columnName, $newValue) {
+      $activeConnection = $this->openDBConnection('current_sessions');
+
+      // Save the passed field as current_field with related uid
+      $sql = "UPDATE current_sessions SET ".$columnName." = '".$newValue."',  WHERE uid = '".$uid."'";
+
+      // Kill connection if error occured
+      if (!$activeConnection->query($sql)) {
+        $this->log->info('quering db error occured');
+        die('error: '.$activeConnection->connect_error);
+      } else {
+        $activeConnection->query($sql);
+      }
+
+      $this->closeDBConnection($activeConnection);
+      $this->log->info('setColumnValue executed seccesfully');
     }
 
     public function setServiceProvider($uid, $serviceProvider) {

@@ -12,12 +12,13 @@
       $this->log->info('processing the message');
 
       // Declerations and Initializations
-      $sameMessage = false;
-      $backend = new backend($this->log);
-      $db = new database($this->log);
-      $uid = $message->getUser()->getUserId();
       $field;
       $fieldName;
+      $backend = new backend($this->log);
+      $db = new database($this->log);
+      $usersMessage = $message->getMessage();
+      $sameMessage = false;
+      $uid = $message->getUser()->getUserId();
 
       // Get the current phase for the current user
       $this->log->info('before getPhase');
@@ -35,7 +36,7 @@
           $this->log->info('matching service provider');
 
           if ($serviceProvider === 'not_found') {
-            $message->setMessage('אני לא מכיר את הספק '.$message->getMessage().' וודא שהקלדת את השם תקין');
+            $message->setMessage('אני לא מכיר את הספק '.$usersMessage.' וודא שהקלדת את השם תקין');
 
             $this->log->info('requested service provider was not found');
             break;
@@ -45,7 +46,7 @@
             $db->setServiceProvider($uid, $serviceProvider);
             $db->setPhase($uid, 1);
 
-            $message->setMessage('על מנת לנתק אותך מ'.$message->getMessage()
+            $message->setMessage('על מנת לנתק אותך מ'.$usersMessage
               .' אצטרך ממך מספר פרטים.'.chr(10).chr(10).'חשוב לי לציין שהפרטיות שלך חשובה לי מאוד ולכן אני מתחייב לא לשמור ולא לשתף את הפרטים המזהים שלך עם אף גורם צד ג.');
 
             $sameMessage = true;
@@ -66,18 +67,22 @@
           $field = $db->getCurrentField($uid);
           if ($field === 'empty') {
             $this->log->info('the field is empty');
+
             if ($sameMessage) {
               $message->setMessage($message->getMessage().$backend->getNextField($field).'?');
-              $db->setCurrentField($uid, $backend->getNextField($field));
             } else {
               $message->setMessage($backend->getNextField($field).'?');
-              $db->setCurrentField($uid, $backend->getNextField($field));
             }
+            $db->setCurrentField($uid, $backend->getNextField($field));
+            $db->setColumnValue($uid, 'first_name', $usersMessage);
+
           } else if ($field !== 'done') {
             $this->log->info('the field is '.$field);
             $message->setMessage($backend->getNextField($field).'?');
             $db->setCurrentField($uid, $backend->getNextField($field));
+            $db->setColumnValue($uid, $field, $usersMessage);
           } else {
+            $message->setMessage('אוקי, קיבלתי ממך את כל מה שאני צריך. לפני שאשלח את הודעת הדואר האלקטרוני ארצה רק לוודא שכל הפרטים נכוניםֿ');
             $this->log->info('the field is done');
             $db->setPhase($uid, 2);
           }
