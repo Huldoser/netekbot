@@ -82,12 +82,13 @@
         case 'last_digits':
           $fieldName = 'מה הם ארבעת הספרות האחרונות של אמצעי התשלום שבאמצעותו אתה משלם לספק';
           break;
-      }
 
-      default:
+        default:
         $fieldName = 'done';
 
-        return $fieldName.'?';
+      }
+
+      return $fieldName.'?';
     }
 
     public function getNextField($currentFieldName) {
