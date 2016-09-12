@@ -59,9 +59,13 @@
           $fieldName = 'מה שם המשפחה שלך';
           break;
 
+        case 'id_number':
+          $fieldName = 'מה מספר תעודת הזהות שלך';
+          break;
+
         case 'email_address':
-         $fieldName = 'כדי שאוכל לשלוח לך העתק של הבקשה אני צריך את כתובת המייל שלך';
-         break;
+          $fieldName = 'כדי שתקבל העתק של הבקשה שלך אני צריך גם את כתובת המייל שלך';
+          break;
 
         case 'phone_number':
           $fieldName = 'מה המספר אותו תרצה לנתק';
@@ -79,6 +83,9 @@
           $fieldName = 'מה הם ארבעת הספרות האחרונות של אמצעי התשלום שבאמצעותו אתה משלם לספק';
           break;
       }
+
+      default:
+        $fieldName = 'done';
 
         return $fieldName.'?';
     }
