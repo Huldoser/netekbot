@@ -50,37 +50,37 @@
     }
 
     public function getQuestionByFieldName($fieldName) {
-      switch ($word) {
+      switch ($fieldName) {
         case 'first_name':
-          $word = 'מה שמך הפרטי';
+          $fieldName = 'מה שמך הפרטי';
           break;
 
         case 'last_name':
-          $word = 'מה שם המשפחה שלך';
+          $fieldName = 'מה שם המשפחה שלך';
           break;
 
         case 'email_address':
-         $word = 'כדי שאוכל לשלוח לך העתק של הבקשה אני צריך את כתובת המייל שלך';
+         $fieldName = 'כדי שאוכל לשלוח לך העתק של הבקשה אני צריך את כתובת המייל שלך';
          break;
 
         case 'phone_number':
-          $word = 'מה המספר אותו תרצה לנתק';
+          $fieldName = 'מה המספר אותו תרצה לנתק';
           break;
 
         case 'settlement':
-          $word = 'באיזה ישוב אתה גר';
+          $fieldName = 'באיזה ישוב אתה גר';
           break;
 
         case 'address':
-          $word = 'מה מספר הבית שלך ומספר הדירה';
+          $fieldName = 'מה מספר הבית שלך ומספר הדירה';
           break;
 
         case 'last_digits':
-          $word = 'מה הם ארבעת הספרות האחרונות של אמצעי התשלום שבאמצעותו אתה משלם לספק';
+          $fieldName = 'מה הם ארבעת הספרות האחרונות של אמצעי התשלום שבאמצעותו אתה משלם לספק';
           break;
       }
 
-        return $word.'?';
+        return $fieldName.'?';
     }
 
     public function getNextField($currentFieldName) {
