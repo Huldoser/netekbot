@@ -79,7 +79,7 @@
     }
 
     public function getCurrentField($uid) {
-      $this->log->info('entered getField with uid '.$uid);
+      $this->log->info('entered getCurrentField with uid '.$uid);
 
       $activeConnection = $this->openDBConnection('current_sessions');
       $this->log->info('executing query');
@@ -95,12 +95,11 @@
         $data = $result->fetch_array();
         if($data['current_field'] === null) {
           $this->log->info('current_field is null. setting to empty');
-          $data['current_field'] = 'empty'; 
+          $data['current_field'] = 'empty';
         }
 
-        return $data['current_field'];
-
         $this->closeDBConnection($activeConnection);
+        return $data['current_field'];
       } else {
         $this->log->info('the query is empty. no current_field has been set yet');
         $this->closeDBConnection($activeConnection);

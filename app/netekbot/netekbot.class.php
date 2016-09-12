@@ -60,24 +60,27 @@
           if ($sameMessage) {
             $message->setMessage($message->getMessage().chr(10).chr(10)
               .'להלן הפרטים שאני צריך על מנת לנסח את המכתב לספק');
-            }
+          }
 
-            // Check if the current field is empty or not done
-            $field = $db->getCurrentField($uid);
-            if ($field === 'empty') {
-              if ($sameMessage) {
-                $message->setMessage($message->getMessage().$backend->getNextField($field).'?');
-                $db->setCurrentField($uid, $backend->getNextField($field));
-              } else {
-                $message->setMessage($backend->getNextField($field).'?');
-                $db->setCurrentField($uid, $backend->getNextField($field));
-              }
-            } else if ($field !== 'done') {
-              $message->setMessage($backend->getNextField($field).'?');
+          // Check if the current field is empty or not done
+          $field = $db->getCurrentField($uid);
+          if ($field === 'empty') {
+            $this->log->info('the field is empty');
+            if ($sameMessage) {
+              $message->setMessage($message->getMessage().$backend->getNextField($field).'?');
               $db->setCurrentField($uid, $backend->getNextField($field));
             } else {
-              $db->setPhase($uid, 2);
+              $message->setMessage($backend->getNextField($field).'?');
+              $db->setCurrentField($uid, $backend->getNextField($field));
             }
+          } else if ($field !== 'done') {
+            $this->log->info('the field is '.$field);
+            $message->setMessage($backend->getNextField($field).'?');
+            $db->setCurrentField($uid, $backend->getNextField($field));
+          } else {
+            $this->log->info('the field is done');
+            $db->setPhase($uid, 2);
+          }
 
         case 2:
         $message->setMessage('case 2!');
