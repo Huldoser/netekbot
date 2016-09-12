@@ -50,7 +50,7 @@
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
-        $this->log->info('error occured: '.$activeConnection->connect_error);
+        $this->log->info('quering db error occured');
         die('error: '.$activeConnection->connect_error);
       } else {
         $activeConnection->query($sql);
@@ -111,11 +111,11 @@
       $activeConnection = $this->openDBConnection('current_sessions');
 
       // Save the passed field as current_field with related uid
-      $sql = "UPDATE current_sessions SET current_field = ".$fieldName." WHERE uid = ".$uid;
+      $sql = "UPDATE current_sessions SET current_field = '".$fieldName."' WHERE uid = '".$uid."'";
 
       // Kill connection if error occured
       if (!$activeConnection->query($sql)) {
-        $this->log->info('error occured: '.$activeConnection->connect_error);
+        $this->log->info('quering db error occured');
         die('error: '.$activeConnection->connect_error);
       } else {
         $activeConnection->query($sql);
