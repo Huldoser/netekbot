@@ -89,10 +89,15 @@
       $result = $activeConnection->query($sql);
 
       // If the field found return it. Otherwise set the stage to 0
-      if ($result['current_field'] === null) {
+      if ($result->num_rows > 0) {
         $this->log->info('the query is not empty');
 
         $data = $result->fetch_array();
+        if($data['current_field'] === null) {
+          $this->log->info('current_field is null. setting to empty');
+          $data['current_field'] = 'empty'; 
+        }
+
         return $data['current_field'];
 
         $this->closeDBConnection($activeConnection);
