@@ -87,6 +87,44 @@
       return $fieldName.'?';
     }
 
+    public function getFieldHebrewTranslation($fieldName) {
+      switch ($fieldName) {
+        case 'first_name':
+          $fieldName = 'שם פרטי';
+          break;
+
+        case 'last_name':
+          $fieldName = 'שם משפחה';
+          break;
+
+        case 'id_number':
+          $fieldName = 'מספר זהות';
+          break;
+
+        case 'email_address':
+          $fieldName = 'כתובת דואר אלקטרוני';
+          break;
+
+        case 'phone_number':
+          $fieldName = 'מספר הטלפון לניתוק';
+          break;
+
+        case 'settlement':
+          $fieldName = 'ישוב מגורים';
+          break;
+
+        case 'address':
+          $fieldName = 'כתובת מגורים';
+          break;
+
+        case 'last_digits':
+          $fieldName = 'ארבעת הספרות האחרונות של אמצעי התשלום שלך';
+          break;
+      }
+
+      return $fieldName.': ';
+    }
+
     public function getNextField($currentFieldName) {
       $fields = array('first_name', 'last_name', 'id_number', 'email_address', 'phone_number',
         'settlement', 'address', 'last_digits', 'done');

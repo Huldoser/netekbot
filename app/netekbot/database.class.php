@@ -143,10 +143,50 @@
       $this->log->info('setColumnValue executed succesfully');
     }
 
+    public function getColumnValue($uid, $columnName) {
+      $activeConnection = $this->openDBConnection('current_sessions');
+      $this->log->info('executing getColumnValue query');
+
+      $sql = "SELECT ".$columnName." FROM current_sessions WHERE uid = ".$uid;
+      mysqli_query($activeConnection, $sql);
+      $result = $activeConnection->query($sql);
+
+      // If the field found return it
+      if ($result->num_rows > 0) {
+        $this->log->info('the query is not empty');
+
+        $data = $result->fetch_array();
+
+        $this->closeDBConnection($activeConnection);
+        return $data['current_field'];
+
+      } else {
+        $this->log->info('the query is empty');
+        $this->closeDBConnection($activeConnection);
+        return 'empty';
+    }
+  }
+
     public function setServiceProvider($uid, $serviceProvider) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
       $sql = "UPDATE current_sessions SET service_provider = '".$serviceProvider."' WHERE uid = '".$uid."'";
+
+      // Kill connection if error occured
+      if ($activeConnection->query($sql) !== true) {
+        $this->log->info('error occured: '.$activeConnection->connect_error);
+        die('error: '.$activeConnection->connect_error);
+      } else {
+        $this->log->info('the query executed succesfully');
+      }
+
+      $this->closeDBConnection($activeConnection);
+    }
+
+    public function getServiceProvider($uid) {
+      $activeConnection = $this->openDBConnection('current_sessions');
+
+        $sql = "SELECT service_provider FROM current_sessions WHERE uid = ".$uid;
 
       // Kill connection if error occured
       if ($activeConnection->query($sql) !== true) {

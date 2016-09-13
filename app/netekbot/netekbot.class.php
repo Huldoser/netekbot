@@ -47,7 +47,7 @@
             $db->setPhase($uid, 1);
 
             $message->setMessage('בחרת להתנתק מ'.$usersMessage.'.'.chr(10)
-              .'כדי לעזור לך להתנתק אני צריך מספר פרטים'.'.'.chr(10).chr(10)
+              .'על מנת לעזור לך להתנתק אני צריך מספר פרטים'.'.'.chr(10).chr(10)
               .'לפני שמתחילים חשוב לי לציין שהפרטיות שלך חשובה לי ולכן אני מתחייב לא לשמור ולא לשתף אף פרט שלך עם אף גורם צד ג');
 
             $sameMessage = true;
@@ -98,10 +98,21 @@
             $db->setPhase($uid, 2);
           }
 
-          break;
+          // NOTICE! No break here for the fall-through behavior.
 
         case 2:
-          $message->setMessage('אוקי, קיבלתי ממך את כל מה שאני צריך. לפני שאשלח את הודעת הדואר האלקטרוני ארצה רק לוודא שכל הפרטים נכוניםֿ');
+          // Print all the entered values
+          $message->setMessage('אוקי, קיבלתי ממך את כל מה שאני צריך. לפני שאשלח את הודעת הדואר האלקטרוני ארצה רק לוודא שכל הפרטים נכוניםֿ'.':').chr(10);
+
+          $message->setMessage('ספק לניתוק'.': '.$db->getServiceProvider($uid).chr(10));
+
+          $allFields = array('first_name', 'last_name', 'id_number', 'email_address', 'phone_number',
+              'settlement', 'address', 'last_digits', 'done');
+          for ($i = 0; $i < sizeof($allFields - 1); $i++) {
+            $message->setMessage($message->getMessage().getFieldHebrewTranslation($allFields[$i]).$db->getColumnValue($uid, $allFields[$i]).chr(10));
+          }
+
+          $message->setMessage(chr(10).$message->getMessage().'חשוב מאוד מאוד לוודא שכל הפרטים נכונים'.','.chr(10).'האם הם אכן נכונים'.'?');
       }
 
       return $message;
