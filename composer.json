@@ -1,5 +1,7 @@
 {
     "require": {
-        "monolog/monolog": "1.*"
+        "monolog/monolog": "1.*",
+        "sendgrid/sendgrid": "~4.0"
+
     }
 }
