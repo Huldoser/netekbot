@@ -107,7 +107,7 @@
           $this->log->info('entered phase 2');
 
           // Print all the entered values
-          $message->setMessage('מצויין, יש לי את כל הפרטים שצריך'.'. '.'לפני שאשלח את ההודעה ארצה שנוודא שכל הפרטים נכונים'.':'.chr(10));
+          $message->setMessage('לפני שאשלח את ההודעה עליך לאמת שכל הפרטים נכונים'.':'.chr(10));
 
           $message->setMessage($message->getMessage().'ספק לניתוק'.': '.$db->getServiceProvider($uid).chr(10));
 
@@ -120,7 +120,11 @@
           $this->log->info('out of the for loop');
 
           $message->setMessage(chr(10).$message->getMessage().'האם הם אכן נכונים'.'?');
+          $db->setPhase($uid, 3);
       }
+
+      case 3:
+        $this->log->info('entered phase 1');
 
       $this->log->info('retunrning message '.$message->getMessage());
       return $message;

@@ -118,7 +118,7 @@
           break;
 
         case 'last_digits':
-          $fieldName = 'ארבעת הספרות האחרונות של אמצעי התשלום שלך';
+          $fieldName = 'ארבעה ספרות אחרונות';
           break;
       }
 
