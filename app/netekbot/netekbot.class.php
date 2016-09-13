@@ -107,7 +107,7 @@
           $this->log->info('entered phase 2');
 
           // Print all the entered values
-          $message->setMessage('אוקי, קיבלתי ממך את כל מה שאני צריך. לפני שאשלח את הודעת הדואר האלקטרוני ארצה רק לוודא שכל הפרטים נכוניםֿ'.':').chr(10);
+          $message->setMessage('מצויין, יש לי את כל הפרטים שצריך'.'. '.'לפני שאשלח את ההודעה ארצה שנוודא שכל הפרטים נכונים'.':'.chr(10));
 
           $message->setMessage($message->getMessage().'ספק לניתוק'.': '.$db->getServiceProvider($uid).chr(10));
 
@@ -119,7 +119,7 @@
           }
           $this->log->info('out of the for loop');
 
-          $message->setMessage(chr(10).$message->getMessage().'חשוב מאוד מאוד לוודא שכל הפרטים נכונים'.'.'.chr(10).'האם הם אכן נכונים'.'?');
+          $message->setMessage(chr(10).$message->getMessage().'האם הם אכן נכונים'.'?');
       }
 
       $this->log->info('retunrning message '.$message->getMessage());
