@@ -46,7 +46,7 @@
             $db->setServiceProvider($uid, $serviceProvider);
             $db->setPhase($uid, 1);
 
-            $message->setMessage('בחרת להתנתק מ'.$usersMessage.'.'.chr(10)
+            $message->setMessage('בחרת להתנתק מ'.$db->getServiceProvider($uid).'.'.chr(10)
               .'על מנת לעזור לך להתנתק אני צריך מספר פרטים'.'.'.chr(10).chr(10)
               .'לפני שמתחילים חשוב לי לציין שהפרטיות שלך חשובה לי ולכן אני מתחייב לא לשמור ולא לשתף אף פרט שלך עם אף גורם צד ג');
 
@@ -85,9 +85,9 @@
 
             // If its the one before the last one, set phase to 2
             if ($field === 'last_digits') {
-              $db->setPhase($uid, 2);
               $db->setCurrentField($uid, $backend->getNextField($field));
               $db->setColumnValue($uid, $field, $usersMessage);
+              $db->setPhase($uid, 2);
             } else {
               $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)));
               $db->setCurrentField($uid, $backend->getNextField($field));
@@ -104,16 +104,20 @@
           // NOTICE! No break here for the fall-through behavior.
 
         case 2:
+          $this->log->info('entered phase 2');
+
           // Print all the entered values
           $message->setMessage('אוקי, קיבלתי ממך את כל מה שאני צריך. לפני שאשלח את הודעת הדואר האלקטרוני ארצה רק לוודא שכל הפרטים נכוניםֿ'.':').chr(10);
 
-          $message->setMessage('ספק לניתוק'.': '.$db->getServiceProvider($uid).chr(10));
+          $message->setMessage($message->getMessage().'ספק לניתוק'.': '.$db->getServiceProvider($uid).chr(10));
 
           $allFields = array('first_name', 'last_name', 'id_number', 'email_address', 'phone_number',
-              'settlement', 'address', 'last_digits', 'done');
-          for ($i = 0; $i < sizeof($allFields - 1); $i++) {
+              'settlement', 'address', 'last_digits');
+          $this->log->info('stepping into the for loop');
+          for ($i = 0; $i < sizeof($allFields); $i++) {
             $message->setMessage($message->getMessage().getFieldHebrewTranslation($allFields[$i]).$db->getColumnValue($uid, $allFields[$i]).chr(10));
           }
+          $this->log->info('out of the for loop');
 
           $message->setMessage(chr(10).$message->getMessage().'חשוב מאוד מאוד לוודא שכל הפרטים נכונים'.','.chr(10).'האם הם אכן נכונים'.'?');
       }
