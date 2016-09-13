@@ -30,8 +30,7 @@
         case 0:
           $this->log->info('entered phase 0');
 
-          $serviceProvider = $message->getMessage();
-          $serviceProvider = $backend->matchProvider($serviceProvider);
+          $serviceProvider = $backend->matchProvider($message->getMessage());
 
           $this->log->info('matching service provider');
 
@@ -103,10 +102,10 @@
 
           // NOTICE! No break here for the fall-through behavior.
 
+        // Confirmation
         case 2:
           $this->log->info('entered phase 2');
 
-          // Print all the entered values
           $message->setMessage('לפני שאשלח את ההודעה עליך לאמת שכל הפרטים נכונים'.':'.chr(10));
 
           $message->setMessage($message->getMessage().'ספק לניתוק'.': '.$db->getServiceProvider($uid).chr(10));
@@ -119,12 +118,22 @@
           }
           $this->log->info('out of the for loop');
 
-          $message->setMessage(chr(10).$message->getMessage().'האם הם אכן נכונים'.'?'.' (כן/לא)');
+          $message->setMessage(chr(10).chr(10).$message->getMessage().'האם הם אכן נכונים'.'?'.' (כן/לא)');
           $db->setPhase($uid, 3);
+          break;
 
-
+        // Conclusion
         case 3:
           $this->log->info('entered phase 3');
+
+          if ($message->getMessage() === 'לא') {
+            $message->setMessage('אם כך בוא נתחיל מההתחלה. מה הספק שתרצה להתנתק ממנו'.'?');
+            $db->setPhase($uid, 0);
+          } else if ($message->getMessage() === 'כן') {
+            // GENERATE TAMPLATE AND MAIL IT
+          } else {
+            $message->setMessage('לא הבנתי למה אתה מתכוון. הם כן נכונים או לא'.'?');
+          }
 
       }
 
