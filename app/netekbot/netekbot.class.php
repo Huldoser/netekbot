@@ -115,7 +115,7 @@
               'settlement', 'address', 'last_digits');
           $this->log->info('stepping into the for loop');
           for ($i = 0; $i < sizeof($allFields); $i++) {
-            $message->setMessage($message->getMessage().getFieldHebrewTranslation($allFields[$i]).$db->getColumnValue($uid, $allFields[$i]).chr(10));
+            $message->setMessage($message->getMessage().$backend->getFieldHebrewTranslation($allFields[$i]).$db->getColumnValue($uid, $allFields[$i]).chr(10));
           }
           $this->log->info('out of the for loop');
 
