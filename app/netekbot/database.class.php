@@ -84,7 +84,7 @@
       $activeConnection = $this->openDBConnection('current_sessions');
       $this->log->info('executing query');
 
-      $sql = "SELECT current_field FROM current_sessions WHERE uid = ".$uid;
+      $sql = "SELECT current_field FROM current_sessions WHERE uid = '".$uid."'";
       mysqli_query($activeConnection, $sql);
       $result = $activeConnection->query($sql);
 
@@ -186,17 +186,27 @@
     public function getServiceProvider($uid) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
-        $sql = "SELECT service_provider FROM current_sessions WHERE uid = '".$uid."'";
+      $sql = "SELECT service_provider FROM current_sessions WHERE uid = '".$uid."'";
+      mysqli_query($activeConnection, $sql);
+      $result = $activeConnection->query($sql);
 
-      // Kill connection if error occured
-      if ($activeConnection->query($sql) !== true) {
-        $this->log->info('error occured: '.$activeConnection->connect_error);
-        die('error: '.$activeConnection->connect_error);
+      // If the field found return it. Otherwise set the current_field to empty
+      if ($result->num_rows > 0) {
+        $this->log->info('the query is not empty');
+
+        $data = $result->fetch_array();
+        if($data['current_field'] === null) {
+          $this->log->info('current_field is null. setting to empty');
+          $data['current_field'] = 'empty';
+        }
+
+        $this->closeDBConnection($activeConnection);
+        return $data['current_field'];
       } else {
-        $this->log->info('the query executed succesfully');
+        $this->log->info('the query is empty. no current_field has been set yet');
+        $this->closeDBConnection($activeConnection);
+        return 'empty';
       }
-
-      $this->closeDBConnection($activeConnection);
     }
 
     private function openDBConnection($tableName) {
