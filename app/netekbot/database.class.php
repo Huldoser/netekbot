@@ -205,6 +205,22 @@
       }
     }
 
+    public function deleteUIDFromDB($uid) {
+      $activeConnection = $this->openDBConnection('current_sessions');
+
+      $sql = "DELETE FROM current_sessions WHERE uid = '".$uid."'";
+
+      // Kill connection if error occured
+      if ($activeConnection->query($sql) !== true) {
+        $this->log->info('error occured: '.$activeConnection->connect_error);
+        die('error: '.$activeConnection->connect_error);
+      } else {
+        $this->log->info('the query executed succesfully');
+      }
+
+      $this->closeDBConnection($activeConnection);
+    }
+
     private function openDBConnection($tableName) {
       // Get envs
       $this->dbName = $_ENV['DB_NAME'];

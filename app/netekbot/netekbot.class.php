@@ -129,6 +129,7 @@
           if ($message->getMessage() === 'לא') {
             $message->setMessage('אם כך בוא נתחיל מההתחלה. מה הספק שתרצה להתנתק ממנו'.'?');
             $db->setPhase($uid, 0);
+            $db->deleteUIDFromDB($uid);
           } else if ($message->getMessage() === 'כן') {
             // GENERATE TAMPLATE AND MAIL IT
           } else {
@@ -137,7 +138,7 @@
 
       }
 
-      $this->log->info('retunrning message '.$message->getMessage());
+      $this->log->info('returning message '.$message->getMessage());
       return $message;
     }
 
