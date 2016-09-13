@@ -158,7 +158,7 @@
         $data = $result->fetch_array();
 
         $this->closeDBConnection($activeConnection);
-        return $data['current_field'];
+        return $data[$columnName];
 
       } else {
         $this->log->info('the query is empty');
@@ -195,13 +195,9 @@
         $this->log->info('the query is not empty');
 
         $data = $result->fetch_array();
-        if($data['current_field'] === null) {
-          $this->log->info('current_field is null. setting to empty');
-          $data['current_field'] = 'empty';
-        }
 
         $this->closeDBConnection($activeConnection);
-        return $data['current_field'];
+        return $data['service_provider'];
       } else {
         $this->log->info('the query is empty. no current_field has been set yet');
         $this->closeDBConnection($activeConnection);
