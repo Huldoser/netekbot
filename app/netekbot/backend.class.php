@@ -42,6 +42,10 @@
           $serviceProvider = 'הוט מובייל';
           break;
 
+        case '012'.' '.'מובייל':
+        case '012':
+          $serviceProvider = '012 מובייל';
+
         default:
           $serviceProvider = 'not_found';
       }
@@ -140,6 +144,30 @@
           }
         }
       }
+    }
+
+    public function generatedTemplate($uid) {
+
+      $template;
+
+
+
+      return $template;
+    }
+
+
+    public function sendMail($uid) {
+      $sendgrid = new SendGrid($_ENV['SENDGRID_USERNAME'], $_ENV['SENDGRID_PASSWORD']);
+
+      // the backslash mean the function will be called from the global namespace
+      $email = new SendGrid\Email();
+      $email->addTo('huldoser@gmail.com')
+        ->setFrom('me@bar.com')
+        ->setSubject('נתקבוט - בקשת ניתוק מספק שירות')
+        ->setText('Hello World!')
+        ->setHtml('<strong>Hello World!</strong>');
+
+        $sendgrid->send($email);
     }
 
   }

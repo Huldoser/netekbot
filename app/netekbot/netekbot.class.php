@@ -21,12 +21,12 @@
       $uid = $message->getUser()->getUserId();
 
       // Get the current phase for the current user
-      $this->log->info('before getPhase');
       $phase = $db->getPhase($uid);
-      $this->log->info('after getPhase. the current phase for uid '.$uid.' is '.$phase);
+      $this->log->info('the current phase for uid '.$uid.' is '.$phase);
 
       switch ($phase) {
-        // Checking for service provider validity if found savinf to db and updating phase to 1
+
+        // SERVICE PROVIDER VALIDITY
         case 0:
           $this->log->info('entered phase 0');
 
@@ -34,13 +34,15 @@
 
           $this->log->info('matching service provider');
 
+          // If no match found we will get back 'not_found'
           if ($serviceProvider === 'not_found') {
             $message->setMessage('אני לא מכיר את הספק '.$usersMessage.' וודא שהקלדת את השם תקין');
 
-            $this->log->info('requested service provider was not found');
+            $this->log->info('the requested service provider was not found');
             break;
+
           } else {
-            $this->log->info('requested service provider was found. saving to db');
+            $this->log->info('requested service provider was found');
 
             $db->setServiceProvider($uid, $serviceProvider);
             $db->setPhase($uid, 1);
@@ -118,7 +120,7 @@
           }
           $this->log->info('out of the for loop');
 
-          $message->setMessage(chr(10).chr(10).$message->getMessage().'האם הם אכן נכונים'.'?'.' (כן/לא)');
+          $message->setMessage(chr(10).$message->getMessage().'האם הם אכן נכונים'.'?'.' (כן/לא)');
           $db->setPhase($uid, 3);
           break;
 
@@ -132,10 +134,12 @@
             $db->deleteUIDFromDB($uid);
           } else if ($message->getMessage() === 'כן') {
             // GENERATE TAMPLATE AND MAIL IT
+            //$generatedTemplate = $backend->generatedTemplate($uid);
+            $backend->sendMail($uid);
+
           } else {
             $message->setMessage('לא הבנתי למה אתה מתכוון. הם כן נכונים או לא'.'?');
           }
-
       }
 
       $this->log->info('returning message '.$message->getMessage());
