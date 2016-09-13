@@ -119,7 +119,7 @@
           }
           $this->log->info('out of the for loop');
 
-          $message->setMessage(chr(10).$message->getMessage().'האם הם אכן נכונים'.'?'.' (כן/לא)';
+          $message->setMessage(chr(10).$message->getMessage().'האם הם אכן נכונים'.'?'.' (כן/לא)');
           $db->setPhase($uid, 3);
 
 
