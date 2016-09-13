@@ -77,6 +77,7 @@
             }
             $db->setCurrentField($uid, $backend->getNextField($field));
             $db->setColumnValue($uid, 'first_name', $usersMessage);
+            break;
 
           // Check if the last field was not reached
           } else if ($field !== 'done') {
@@ -91,6 +92,7 @@
 
             $db->setCurrentField($uid, $backend->getNextField($field));
             $db->setColumnValue($uid, $field, $usersMessage);
+            break;
 
           } else {
 
