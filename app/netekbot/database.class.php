@@ -147,7 +147,7 @@
       $activeConnection = $this->openDBConnection('current_sessions');
       $this->log->info('executing getColumnValue query');
 
-      $sql = "SELECT ".$columnName." FROM current_sessions WHERE uid = ".$uid;
+      $sql = "SELECT ".$columnName." FROM current_sessions WHERE uid = '".$uid."'";
       mysqli_query($activeConnection, $sql);
       $result = $activeConnection->query($sql);
 
@@ -186,7 +186,7 @@
     public function getServiceProvider($uid) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
-        $sql = "SELECT service_provider FROM current_sessions WHERE uid = ".$uid;
+        $sql = "SELECT service_provider FROM current_sessions WHERE uid = '".$uid."'";
 
       // Kill connection if error occured
       if ($activeConnection->query($sql) !== true) {
