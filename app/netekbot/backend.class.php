@@ -68,7 +68,7 @@
           break;
 
         case 'phone_number':
-          $fieldName = 'מה המספר אותו תרצה לנתק';
+          $fieldName = 'איזה מספר תרצה לנתק';
           break;
 
         case 'settlement':
@@ -82,10 +82,6 @@
         case 'last_digits':
           $fieldName = 'מה הם ארבעת הספרות האחרונות של אמצעי התשלום שבאמצעותו אתה משלם לספק';
           break;
-
-        default:
-        $fieldName = 'done';
-
       }
 
       return $fieldName.'?';

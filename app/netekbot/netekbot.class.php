@@ -66,6 +66,7 @@
 
           // Check if the current field is empty or not done
           $field = $db->getCurrentField($uid);
+          // If the field is empty set it to the first needed field
           if ($field === 'empty') {
             $this->log->info('the field is empty');
 
@@ -77,10 +78,14 @@
             $db->setCurrentField($uid, $backend->getNextField($field));
             $db->setColumnValue($uid, 'first_name', $usersMessage);
 
+          // Check if the last field was not reached
           } else if ($field !== 'done') {
             $this->log->info('the field is '.$field);
 
-            if ($field !== 'last_digits') {
+            // If its the one before the last one, set phase to 2
+            if ($field === 'last_digits') {
+              $db->setPhase($uid, 2);
+            } else {
               $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)));
             }
 
