@@ -119,9 +119,10 @@
           }
           $this->log->info('out of the for loop');
 
-          $message->setMessage($message->getMessage().'חשוב מאוד מאוד לוודא שכל הפרטים נכונים'.'.'.chr(10).'האם הם אכן נכונים'.'?');
+          $message->setMessage(chr(10).$message->getMessage().'חשוב מאוד מאוד לוודא שכל הפרטים נכונים'.'.'.chr(10).'האם הם אכן נכונים'.'?');
       }
 
+      $this->log->info('retunrning message '.$message->getMessage());
       return $message;
     }
 
