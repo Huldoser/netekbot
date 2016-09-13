@@ -86,15 +86,16 @@
             // If its the one before the last one, set phase to 2
             if ($field === 'last_digits') {
               $db->setPhase($uid, 2);
+              $db->setCurrentField($uid, $backend->getNextField($field));
+              $db->setColumnValue($uid, $field, $usersMessage);
             } else {
               $message->setMessage($backend->getQuestionByFieldName($backend->getNextField($field)));
+              $db->setCurrentField($uid, $backend->getNextField($field));
+              $db->setColumnValue($uid, $field, $usersMessage);
+              break;
             }
 
-            $db->setCurrentField($uid, $backend->getNextField($field));
-            $db->setColumnValue($uid, $field, $usersMessage);
-            break;
-
-          } else {
+          } else if ($field === 'done') {
 
             $this->log->info('the field is done');
             $db->setPhase($uid, 2);
