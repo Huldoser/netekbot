@@ -170,7 +170,7 @@
     }
 
 
-    public function sendMail($uid, $to, $from, $message, $html_message) {
+    public function sendMail($to, $from, $message, $html_message) {
       $sendgrid = new SendGrid($_ENV['SENDGRID_USERNAME'], $_ENV['SENDGRID_PASSWORD']);
 
       // the backslash mean the function will be called from the global namespace
