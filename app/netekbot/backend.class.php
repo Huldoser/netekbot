@@ -178,8 +178,8 @@
       $email->addTo($to)
         ->setFrom($from)
         ->setSubject('נתקבוט - בקשת ניתוק מספק שירות')
-        ->setText('Hello World!')
-        ->setHtml('<b>Hello World!</b>');
+        ->setText($message)
+        ->setHtml($html_message);
 
         $sendgrid->send($email);
     }

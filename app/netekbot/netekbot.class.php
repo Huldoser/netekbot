@@ -146,7 +146,7 @@
 
             $backend->sendMail("huldoser@gmail.com", $db->getColumnValue($uid, "email_address"), $email_message, $email_message_html);
 
-            $message->setMessage('הודעת דואר אלקטרונית הכוללת את המכתב לספק נשלחה אליך ול'.$db->getServiceProvider($ui).'והיא תגיע בדקות הקרובות'.'.'
+            $message->setMessage('הודעת דואר אלקטרונית הכוללת את המכתב לספק נשלחה אליך ול'.$db->getColumnValue($uid, "service_provider").'והיא תגיע בדקות הקרובות'.'.'
               .chr(10).'שמחתי לעזור לך ושמח שוב בעתיד'.'.'.chr(10).chr(10).'במידה ותרצה להתנתק מעוד ספק אנא רשום את שם הספק, אחרת אתה יכול לסגור את ההודעה'.'.');
             $db->setPhase($uid, 0);
           } else {
