@@ -146,26 +146,40 @@
       }
     }
 
-    public function generatedTemplate($uid) {
+    public function generatedTemplate($serviceProvider, $phone_number, $full_name,$id_number, $settlement, $address,
+      $last_digits, $html) {
 
-      $template;
+        $template;
 
-
-
+        if ($html) {
+          $template = 'לכבוד'.' '.$serviceProvider.'<br /><br />'
+            .'בהתאם לסעיף 13ד לחוק הגנת הצרכן, '.'הריני מודיע על ביטול העסקה המתמשכת לאספקת שרותי תקשורת למנוי'.' '.$serviceProvider.'<br /><br />'
+            .'שמי הוא '.$full_name.','.'מספר תעודת הזהות שלי הינו'.' '.$id_number.', '.'כתובתי היא '.$address.', '.$settlement.' וארבעת הספרות האחרונות של האמצעי המשמש לתשלום הינו '.$last_digits.'.'.'<br /><br />'
+            .'בהתאם לסעיף 13ד(ג) לחוק'.', '.'הנכם נדרשים לנתק אותי מיידית'.', '.'ולא מאוחר משלושה ימי עסקים מיום משלוח הודעה זו.'.'<br /><br />'
+            .'באם לא תעשו כן'.', '.'על פי סעיף 13ד(ד) לחוק'.', '.'בית המשפט יהיה רשאי להטיל עליכם פיצויים עונשיים.'.'<br /><br />'
+            .'הודעתי היא סופית'.', '.'ואני מבקש/ת כי לא יפנו אלי נציגי שירות לקוחות ןכיוצא בזה.';
+        } else {
+        $template = 'לכבוד'.' '.$serviceProvider.chr(10).chr(10)
+          .'בהתאם לסעיף 13ד לחוק הגנת הצרכן, '.'הריני מודיע על ביטול העסקה המתמשכת לאספקת שרותי תקשורת למנוי'.' '.$serviceProvider.chr(10).chr(10)
+          .'שמי הוא '.$full_name.','.'מספר תעודת הזהות שלי הינו'.' '.$id_number.', '.'כתובתי היא '.$address.', '.$settlement.' וארבעת הספרות האחרונות של האמצעי המשמש לתשלום הינו '.$last_digits.'.'.chr(10).chr(10)
+          .'בהתאם לסעיף 13ד(ג) לחוק'.', '.'הנכם נדרשים לנתק אותי מיידית'.', '.'ולא מאוחר משלושה ימי עסקים מיום משלוח הודעה זו.'.chr(10).chr(10)
+          .'באם לא תעשו כן'.', '.'על פי סעיף 13ד(ד) לחוק'.', '.'בית המשפט יהיה רשאי להטיל עליכם פיצויים עונשיים.'.chr(10).chr(10)
+          .'הודעתי היא סופית'.', '.'ואני מבקש/ת כי לא יפנו אלי נציגי שירות לקוחות ןכיוצא בזה.';
+      }
       return $template;
     }
 
 
-    public function sendMail($uid) {
+    public function sendMail($uid, $to, $from, $message, $html_message) {
       $sendgrid = new SendGrid($_ENV['SENDGRID_USERNAME'], $_ENV['SENDGRID_PASSWORD']);
 
       // the backslash mean the function will be called from the global namespace
       $email = new SendGrid\Email();
-      $email->addTo('huldoser@gmail.com')
-        ->setFrom('me@bar.com')
+      $email->addTo($to)
+        ->setFrom($from)
         ->setSubject('נתקבוט - בקשת ניתוק מספק שירות')
         ->setText('Hello World!')
-        ->setHtml('<strong>Hello World!</strong>');
+        ->setHtml('<b>Hello World!</b>');
 
         $sendgrid->send($email);
     }

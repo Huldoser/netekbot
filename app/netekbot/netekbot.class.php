@@ -19,6 +19,8 @@
       $usersMessage = $message->getMessage();
       $sameMessage = false;
       $uid = $message->getUser()->getUserId();
+      $mail_message;
+      $email_message_html
 
       // Get the current phase for the current user
       $phase = $db->getPhase($uid);
@@ -134,9 +136,19 @@
             $db->deleteUIDFromDB($uid);
           } else if ($message->getMessage() === 'כן') {
             // GENERATE TAMPLATE AND MAIL IT
-            //$generatedTemplate = $backend->generatedTemplate($uid);
-            $backend->sendMail($uid);
+            $email_message = $backend->generatedTemplate($backend->matchProvider($db->getServiceProvider($uid)), $db->getColumnValue($uid, "phone_number")
+            , $db->getColumnValue($uid, "first_name").' '.$db->getColumnValue($uid, "last_name"), $db->getColumnValue($uid, "id_number")
+            , $db->getColumnValue($uid, "settlement"), $db->getColumnValue($uid, "address"), $db->getColumnValue($uid, "last_digits"), false);
 
+            $email_message_html = $email_message = $backend->generatedTemplate($backend->matchProvider($db->getServiceProvider($uid)), $db->getColumnValue($uid, "phone_number")
+            , $db->getColumnValue($uid, "first_name").' '.$db->getColumnValue($uid, "last_name"), $db->getColumnValue($uid, "id_number")
+            , $db->getColumnValue($uid, "settlement"), $db->getColumnValue($uid, "address"), $db->getColumnValue($uid, "last_digits"), true);
+
+            $backend->sendMail("huldoser@gmail.com", $db->getColumnValue($uid, "email_address"), $email_message, $email_message_html);
+
+            $message->setMessage('הודעת דואר אלקטרונית הכוללת את המכתב לספק נשלחה אליך ול'.$db->getServiceProvider($ui).'והיא תגיע בדקות הקרובות'.'.'
+              .chr(10).'שמחתי לעזור לך ושמח שוב בעתיד'.'.'.chr(10).chr(10).'במידה ותרצה להתנתק מעוד ספק אנא רשום את שם הספק, אחרת אתה יכול לסגור את ההודעה'.'.');
+            $db->setPhase($uid, 0);
           } else {
             $message->setMessage('לא הבנתי למה אתה מתכוון. הם כן נכונים או לא'.'?');
           }
