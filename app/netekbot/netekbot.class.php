@@ -20,7 +20,7 @@
       $sameMessage = false;
       $uid = $message->getUser()->getUserId();
       $mail_message;
-      $email_message_html
+      $email_message_html;
 
       // Get the current phase for the current user
       $phase = $db->getPhase($uid);
