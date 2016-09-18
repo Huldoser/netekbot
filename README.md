@@ -23,7 +23,7 @@ Heroku - Free Dynos.<br />
 ClearDB MySql - Ignite.<br />
 SendGrid - Starter.<br />
 
-This services are not essential for the bot to work but are the easiest & fastest way to get started.
+Thus services are not essential for the bot to work but are the easiest & fastest way to get started.
 
 ### License
 This project have no license.
