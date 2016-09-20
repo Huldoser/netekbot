@@ -2,23 +2,23 @@
 
   class config {
 
-    $db = array(
-      'dbName' => $ENV_['DB_NAME'],
-      'dbUserName' => $ENV_['DB_USER_NAME'],
-      'dbPassword' => $ENV_['DB_PASSWORD'],
-      'dbUrl' => $ENV_['DB_URL']
+    static $db = array(
+      'dbName' => $_ENV['DB_NAME'],
+      'dbUserName' => $_ENV['DB_USER_NAME'],
+      'dbPassword' => $_ENV['DB_PASSWORD'],
+      'dbUrl' => $_ENV['DB_URL']
     );
 
-    $facebook = array(
-      'fbAccessToken' => $ENV_['FB_ACCESS_TOKEN'],
-      'fbVerificationToken' => $ENV_['FB_VERIFICATION_TOKEN'],
+    static $facebook = array(
+      'fbAccessToken' => $_ENV['FB_ACCESS_TOKEN'],
+      'fbVerificationToken' => $_ENV['FB_VERIFICATION_TOKEN'],
       'fbSendUrl' => 'https://graph.facebook.com/v2.7/me/messages?access_token='
 
     );
 
-    $sendGrid = array(
-      'sgUserName' => $ENV_['SG_USER_NAME'],
-      'sgPassword' => $ENV_['SG_PASSWORD']
+    static $sendGrid = array(
+      'sgUserName' => $_ENV['SG_USER_NAME'],
+      'sgPassword' => $_ENV['SG_PASSWORD']
     );
   }
 
