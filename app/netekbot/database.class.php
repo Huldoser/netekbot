@@ -223,10 +223,10 @@
 
     private function openDBConnection($tableName) {
       // Get configurations
-      $this->dbName = config::$db['dbName'];
-      $this->dbUserName = config::$db['dbUserName'];
-      $this->dbPassword = config::$db['dbPassword'];
-      $this->dbUrl = config::$db['dbUrl'];
+      $this->dbName = config::getDatabaseConfigs()['dbName'];
+      $this->dbUserName = config::getDatabaseConfigs()['dbUserName'];
+      $this->dbPassword = config::getDatabaseConfigs()['dbPassword'];
+      $this->dbUrl = config::getDatabaseConfigs()['dbUrl'];
       $this->dbTableName = $tableName;
 
       // Create connection

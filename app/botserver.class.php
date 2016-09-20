@@ -71,8 +71,8 @@
     }
 
     public function sendMessage($message) {
-      $accessToken = config::$facebook['fbAccessToken'];
-      $url = config::$facebook['fbSendUrl'].$accessToken.'';
+      $accessToken = config::getFacebookConfigs['fbAccessToken'];
+      $url = config::getFacebookConfigs['fbSendUrl'].$accessToken;
       $postData = json_encode(array(
         'recipient' => array('id' => $message->getUser()->getUserId()),
         'message' => array('text' => $message->getMessage())
