@@ -21,15 +21,15 @@
       'sgPassword' => $_ENV['SG_PASSWORD']
     );
 
-  public static function getDatabaseConfigs() {
+  public function getDatabaseConfigs() {
     return $this->database;
   }
 
-  public static function getFacebookConfigs() {
+  public function getFacebookConfigs() {
     return $this->facebook;
   }
 
-  public static function getSendGridConfigs() {
+  public function getSendGridConfigs() {
     return $this->sendGrid;
   }
 

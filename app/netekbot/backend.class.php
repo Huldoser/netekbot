@@ -173,7 +173,7 @@
 
 
     public function sendMail($to, $from, $message, $html_message) {
-      $sendgrid = new SendGrid(config::getSendGridConfigs()['sgUserName'], config::getSendGridConfigs()['sgPassword']);
+      $sendgrid = new SendGrid(new Config()->getSendGridConfigs()['sgUserName'], new Config()->getSendGridConfigs()['sgPassword']);
 
       // the backslash mean the function will be called from the global namespace
       $email = new SendGrid\Email();
