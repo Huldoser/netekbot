@@ -22,17 +22,17 @@
     );
 
   public static function getDatabaseConfigs() {
-    return $database;
+    return $this->database;
   }
 
   public static function getFacebookConfigs() {
-    return $facebook;
+    return $this->facebook;
   }
 
   public static function getSendGridConfigs() {
-    return $sendGrid;
+    return $this->sendGrid;
   }
-  
+
 }
 
 ?>
