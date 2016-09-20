@@ -20,7 +20,6 @@
       'sgUserName' => $_ENV['SG_USER_NAME'],
       'sgPassword' => $_ENV['SG_PASSWORD']
     );
-  }
 
   public static function getDatabaseConfigs() {
     return $database;
@@ -33,5 +32,7 @@
   public static function getSendGridConfigs() {
     return $sendGrid;
   }
+  
+}
 
 ?>
