@@ -222,11 +222,11 @@
     }
 
     private function openDBConnection($tableName) {
-      // Get envs
-      $this->dbName = $_ENV['DB_NAME'];
-      $this->dbUserName = $_ENV['DB_USER_NAME'];
-      $this->dbUrl = $_ENV['DB_URL'];
-      $this->dbPassword = $_ENV['DB_PASSWORD'];
+      // Get configurations
+      $this->dbName = config::$db['dbName'];
+      $this->dbUserName = config::$db['dbUserName'];
+      $this->dbPassword = config::$db['dbPassword'];
+      $this->dbUrl = config::$db['dbUrl'];
       $this->dbTableName = $tableName;
 
       // Create connection
