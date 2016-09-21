@@ -51,10 +51,11 @@
 
       $messaging_events = $data['entry'][0]['messaging']; // messaging is the event we are getting from facebook
 
-      $event = $messaging_events[0]; // Getting the first message event
-      $sender = $event['sender'];
-      $recipient = $event['recipient'];
+      $event = $messaging_events[0]; // Extracting the first message event
+      $sender = $event['sender']; // Extracting the sender
+      $recipient = $event['recipient']; // Extracting the recipient
 
+      // Making sure we got a message and if not, notify the user
       if (isset($event['message']) && isset($event['message']['text'])) {
         $text = $event['message']['text'];
 
@@ -68,9 +69,15 @@
         }
       } else {
         $this->log->error('error proccessing message');
-        $this->sendMessage('בוטים אדירים'.'!'.' נראה שיש לי תקלה'.'!'.chr(10)
+
+        $text = 'בוטים אדירים'.'!'.' נראה שיש לי תקלה'.'!'.chr(10)
           .'בזמן שאני מתקן אותה'.', '.'אולי זה זמן טוב לשתות כוס קפה'.'?'.chr(10)
-          .'אני מאוד אשתדל לפתור אותה עד שהקפה יגמר...');
+          .'אני מאוד אשתדל לפתור אותה עד שהקפה יגמר...';
+
+        $message = new message($text, new user($sender['id']));
+        $botMessage = $this->bot->processMessage($message);
+
+        $this->sendMessage($text);
       }
     }
 
