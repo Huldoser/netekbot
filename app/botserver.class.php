@@ -75,8 +75,6 @@
           .'אני מאוד אשתדל לפתור אותה עד שהקפה יגמר...';
 
         $message = new message($text, new user($sender['id']));
-        $botMessage = $this->bot->processMessage($message);
-
         $this->sendMessage($message);
       }
     }
