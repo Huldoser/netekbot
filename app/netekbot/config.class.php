@@ -23,7 +23,7 @@
     }
 
     // Because static variable cannot accept expressions we need to init it
-    private function init($arrayName) {
+    private static function init($arrayName) {
       if ($arrayName == 'database') {
         self::$array = array(
           'dbName' => $_ENV['DB_NAME'],
