@@ -77,7 +77,7 @@
         $message = new message($text, new user($sender['id']));
         $botMessage = $this->bot->processMessage($message);
 
-        $this->sendMessage($text);
+        $this->sendMessage($message);
       }
     }
 
