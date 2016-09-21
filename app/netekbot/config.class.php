@@ -7,17 +7,17 @@
     // Blocking the abillity to make instances of this class
     private function __construct() {}
 
-    public function getDatabase($key) {
+    public static function getDatabase($key) {
       self::init('database');
       return self::$array[$key];
     }
 
-    public function getFacebook($key) {
+    public static function getFacebook($key) {
       self::init('facebook');
       return self::$array[$key];
     }
 
-    public function getSendGrid($key) {
+    public static function getSendGrid($key) {
       self::init('sendGrid');
       return self::$array[$key];
     }
