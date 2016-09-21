@@ -5,7 +5,7 @@
             'app/netekbot'
     ];
 
-    spl_autoload_extensions('.class.php,.abstract.php,.php');
+    spl_autoload_extensions('.class.php, .php');
 
     //Set applications paths for the spl_autoloader
     foreach($autoloaderpaths as $path){

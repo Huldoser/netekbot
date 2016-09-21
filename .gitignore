@@ -1,1 +1,6 @@
+#folders
 vendor
+
+#files
+composer.phar
+composer.lock

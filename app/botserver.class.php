@@ -2,11 +2,10 @@
 
   class BotServer {
 
+    private $bot;
     private $log;
     private $verificationToken;
     private $hubChallenge;
-
-    private $bot;
 
     public function __construct($log, $verificationToken) {
       $this->log = $log;
@@ -46,7 +45,7 @@
     }
 
     private function readMessage() {
-      $data = json_decode(file_get_contents('php://input'), true); //php://input == POST
+      $data = json_decode(file_get_contents('php://input'), true); // php://input == POST
       $messaging_events = $data['entry'][0]['messaging'];
 
       //foreach((array) $messaging_events as $key => $value) {
