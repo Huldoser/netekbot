@@ -2,5 +2,5 @@
 vendor
 
 #files
-composer.phar
+*.phar
 .DS_Store
