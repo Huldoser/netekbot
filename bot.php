@@ -4,7 +4,7 @@
   require_once('logger.php');
 
   // Init bot server
-  $botServer = config::getFacebook('fbVerificationToken');
+  $botServer = new BotServer($log, config::getFacebook('fbVerificationToken'));
 
   // Init bot and add to server
   $netekbot = new Netekbot($log);
