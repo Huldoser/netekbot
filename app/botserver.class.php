@@ -47,7 +47,7 @@
     private function readMessage() {
       $data = json_decode(file_get_contents('php://input'), true); // php://input == POST
 
-      $this->log->info(print_r($data));
+      $this->log->info(print_r($data, true));
 
       $messaging_events = $data['entry'][0]['messaging']; // messaging is the event we are getting from facebook
 
