@@ -7,6 +7,7 @@
       $this->log = $log;
     }
 
+
     public function matchProvider($serviceProvider) {
       switch ($serviceProvider) {
         case 'פלאפון':
@@ -53,6 +54,7 @@
       return $serviceProvider;
     }
 
+
     public function getQuestionByFieldName($fieldName) {
       switch ($fieldName) {
         case 'first_name':
@@ -90,6 +92,7 @@
 
       return $fieldName.'?';
     }
+
 
     public function getFieldHebrewTranslation($fieldName) {
       switch ($fieldName) {
@@ -129,6 +132,7 @@
       return $fieldName.': ';
     }
 
+
     public function getNextField($currentFieldName) {
       $fields = array('first_name', 'last_name', 'id_number', 'email_address', 'phone_number',
         'settlement', 'address', 'last_digits', 'done');
@@ -145,6 +149,7 @@
         }
       }
     }
+
 
     public function generatedTemplate($serviceProvider, $phone_number, $full_name,$id_number, $settlement, $address,
       $last_digits, $html) {
@@ -184,6 +189,7 @@
 
         $sendgrid->send($email);
     }
+
 
   }
 

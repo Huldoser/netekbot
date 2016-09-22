@@ -7,20 +7,24 @@
     // Blocking the abillity to make instances of this class
     private function __construct() {}
 
+
     public static function getDatabase($key) {
       self::init('database');
       return self::$array[$key];
     }
+
 
     public static function getFacebook($key) {
       self::init('facebook');
       return self::$array[$key];
     }
 
+
     public static function getSendGrid($key) {
       self::init('sendGrid');
       return self::$array[$key];
     }
+
 
     // Because static variable cannot accept expressions we need to init it
     private static function init($arrayName) {
@@ -46,6 +50,8 @@
         );
       }
     }
+
+    
   }
 
 ?>

@@ -13,6 +13,7 @@
       $this->log = $log;
     }
 
+
     public function getPhase($uid) {
       $this->log->info('entered getPhase with uid '.$uid);
 
@@ -41,6 +42,7 @@
       }
     }
 
+
     // This function set the phase for existing user
     public function setPhase($uid, $phaseNumber) {
       $activeConnection = $this->openDBConnection('current_sessions');
@@ -60,6 +62,7 @@
       $this->log->info('setPhase executed succesfully');
     }
 
+
     // this function crates a new user in db and set phase to 0
     private function addUser($uid) {
       $activeConnection = $this->openDBConnection('current_sessions');
@@ -77,6 +80,7 @@
 
       $this->closeDBConnection($activeConnection);
     }
+
 
     public function getCurrentField($uid) {
       $this->log->info('entered getCurrentField with uid '.$uid);
@@ -107,6 +111,7 @@
       }
     }
 
+
     public function setCurrentField($uid, $newValue) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
@@ -125,6 +130,7 @@
       $this->log->info('setCurrentField executed succesfully');
     }
 
+
     public function setColumnValue($uid, $columnName, $newValue) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
@@ -142,6 +148,7 @@
       $this->closeDBConnection($activeConnection);
       $this->log->info('setColumnValue executed succesfully');
     }
+
 
     public function getColumnValue($uid, $columnName) {
       $activeConnection = $this->openDBConnection('current_sessions');
@@ -167,6 +174,7 @@
     }
   }
 
+
     public function setServiceProvider($uid, $serviceProvider) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
@@ -182,6 +190,7 @@
 
       $this->closeDBConnection($activeConnection);
     }
+
 
     public function getServiceProvider($uid) {
       $activeConnection = $this->openDBConnection('current_sessions');
@@ -205,6 +214,7 @@
       }
     }
 
+
     public function deleteUIDFromDB($uid) {
       $activeConnection = $this->openDBConnection('current_sessions');
 
@@ -220,6 +230,7 @@
 
       $this->closeDBConnection($activeConnection);
     }
+
 
     private function openDBConnection($tableName) {
       // Get configurations
@@ -244,6 +255,7 @@
         return $this->connection;
       }
     }
+
 
     private function closeDBConnection($theConnection) {
       $this->log->info('closing connection');
