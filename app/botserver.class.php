@@ -80,7 +80,7 @@
         $this->sendMessage($message);
 
       // Check if we got the event but there is no message
-      } else if ((isset($event['message']) && !isset($event['message']['text'])) {
+      } else if (isset($event['message']) && !isset($event['message']['text'])) {
         $this->log->info('the message is invalid');
 
         $text = 'מאוד ניסיתי אבל אני לא מצליח להבין את מה ששלחת לי.'.chr(10).chr(10)
